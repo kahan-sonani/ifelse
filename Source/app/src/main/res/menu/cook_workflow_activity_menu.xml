@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/showCategories"
+        android:checkable="true"
+        android:orderInCategory="2"
+        android:title="Show categories"
+        android:titleCondensed="Show categories"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/showDescription"
+        android:checkable="true"
+        android:orderInCategory="1"
+        android:title="Show Details"
+        android:titleCondensed="Show Details"
+        app:materialIcon="information"
+        app:materialIconColor="#757575"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/searchEntity"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/colorBlack"
+        android:orderInCategory="0"
+        android:title="Search"
+        android:titleCondensed="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom" />
+</menu>

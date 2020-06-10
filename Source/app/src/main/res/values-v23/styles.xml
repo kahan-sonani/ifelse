@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="myTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorSecondary">@color/colorYellow</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/colorBlack</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_close_white</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+        <item name="android:statusBarColor">@color/colorWhite</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SplashPreview" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/startup_logo</item>
+        <item name="android:statusBarColor">@color/colorBlack</item>
+    </style>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.tnj.if_else.viewModels.CookWorkflowModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/details_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginEnd="@dimen/dp20">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_title"
+                    style="@style/editText_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/workflow_title_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:text="@{model.workflow.details.name}"
+                        android:imeOptions="actionNext"
+                        android:inputType="textShortMessage"
+                        android:maxLength="50" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_description"
+                    style="@style/editText_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_title"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/workflow_description_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Description (optional)"
+                        android:text="@{model.workflow.details.description}"
+                        android:imeOptions="actionNext"
+                        android:maxLines="10"
+                        android:minLines="2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/color_layout"
+                    style="@style/editText_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_description"
+                    android:layout_marginTop="10dp"
+                    endIconDrawable="@{model.workflow.details.Color.color}"
+                    app:endIconDrawable="@drawable/color_drawable"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorGray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/choose_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/viewClickStyle"
+                        android:hint="Choose color"
+                        android:text="@{model.workflow.details.Color.name}"
+                        android:inputType="none"
+                        android:textColor="@color/colorBlack" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/save_workflow"
+            style="@style/black_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/details_root" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

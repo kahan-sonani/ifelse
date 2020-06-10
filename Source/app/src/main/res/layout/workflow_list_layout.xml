@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp12"
+        android:layout_marginEnd="@dimen/dp12"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dp10"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp16">
+
+            <include
+                android:id="@+id/workflowDetails"
+                layout="@layout/workflow_name_status_layout" />
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:id="@+id/workflow_icons"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/trigger_icon"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_width="@dimen/dp26"
+                    android:layout_marginStart="4dp"
+                    android:layout_centerVertical="true"
+                    app:materialIconColor="@color/colorWhite" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/action_icon"
+                    android:layout_marginStart="4dp"
+                    android:layout_width="@dimen/dp26"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/trigger_icon"
+                    app:materialIconColor="@color/colorWhite" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/criteria_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_width="@dimen/dp26"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_marginEnd="@dimen/dp10"
+                    android:layout_toEndOf="@id/action_icon"
+                    app:materialIconColor="@color/colorWhite" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

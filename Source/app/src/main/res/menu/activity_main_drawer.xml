@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/shareWorkflowFragment"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share your workflows" />
+        <item
+            android:id="@+id/reportBugFragment"
+            android:icon="@drawable/ic_menu_report_bug"
+            android:title="Report a Bug" />
+        <item
+            android:id="@+id/workflowRequestFragment"
+            android:icon="@drawable/ic_menu_workflow_request"
+            android:title="Workflow request" />
+    </group>
+</menu>

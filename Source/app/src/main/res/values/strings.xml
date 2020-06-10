@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">IFELSE</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="version_code">v0.1</string>
+
+    <string name="app_primary_description">Android automation App</string>
+    <string name="menu_home">Home</string>
+    <string name="error_connection">No Internet connection!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="CONNECTIVITY_CHANGE">android.net.conn.CONNECTIVITY_CHANGE</string>
+
+    <string name="intro_helper_text_for_built_in_workflow"><b>IFELSE</b> provides you with in-built workflow with it\'s in-built functionality that you can try and use. Click on the <b>TRY IT</b> button to navigate there.</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="application_settings_header">Application</string>
+
+    <!--Preference Title -->
+    <string name="application_service_title">IFELSE Automation service</string>
+
+    <!-- Service description -->
+    <string name="service_description_expanded"> This service is responsible for executing list of running workflows in the application.\n\nActions defined inside running workflow will perform tasks automatically when trigger fires at required criteria(if provided).</string>
+    <string name="service_description_condensed"> This service is responsible for executing list of running workflows as a foreground service.</string>
+
+    <!-- Preference keys -->
+    <string name="preference_ifelse_foreground_service">ifelse_foreground_service</string>
+
+    <!-- Service process ID -->
+    <string name="service_process_id">com.tnj.if_else.services</string>
+
+    <!-- Error strings -->
+    <string name="error_email_format_invalid">The email address is badly formatted.</string>
+    <string name="error_field_required">Required!</string>
+    <string name="error_password_wrong">Incorrect Password</string>
+    <string name="error_password_format_invalid">The password must contain atleast 8 characters, 1 letter and 1 number.</string>
+    <string name="error_password_mismatch">The password doesn\'t match.</string>
+
+    <!-- Success Strings -->
+    <string name="success_validation"/>
+    <string name="success_new_email">%1s is not registered for any IFELSE account.</string>
+    <string name="success_existing_email">%1s email address is already registered for another IFELSE account.</string>
+    <string name="success_existing_email_google">%1s email address is already registered for another IFELSE account using Google credentials.</string>
+    <string name="success_login">Sign in to IFELSE account success with %1s.</string>
+    <string name="success_create_account">IFELSE account created successfully using %1s.</string>
+    <string name="success_sign_in_with_google_credentials">Sign in using Google credentials successful with %1s.</string>
+    <string name="success_password_reset_link_sent">Email successfully sent to %1s, Now please check your inbox!.</string>
+
+    <!-- Helper Strings -->
+    <string name="helper_password_link_send_information">Email will be sent to { %1s } containing the link to reset the password, After resetting password open app again to login with the new password!,Click OKAY to send the email or Click CANCEL to Deny!</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import
+            alias="view"
+            type="android.view.View" />
+
+        <variable
+            name="showDetails"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="@dimen/dp16"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dp10"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/nameIconLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/child_icon"
+                    style="@style/workflow_icons_style"
+                    android:layout_width="@dimen/dp28"
+                    android:layout_height="@dimen/dp28"
+                    android:layout_centerVertical="true"
+                    app:materialIconColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/child_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_mono"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dp12"
+                    app:layout_constraintStart_toEndOf="@id/child_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/child_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_mono"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dp10"
+                android:visibility="@{showDetails ? view.VISIBLE : view.GONE }"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameIconLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

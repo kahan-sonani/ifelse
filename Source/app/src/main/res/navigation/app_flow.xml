@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_drawer_flow"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_singleWorkflowManagerActivity"
+            app:destination="@id/singleWorkflowManagerActivity" />
+        <action
+            app:enterAnim="@anim/nav_default_enter_anim"
+            android:id="@+id/action_homeFragment_to_tryBuiltInFragment"
+            app:destination="@id/navigation3" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareWorkflowFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.ShareWorkflowFragment"
+        android:label="Share your Workflow"
+        tools:layout="@layout/fragment_share_workflow" />
+    <fragment
+        android:id="@+id/workflowRequestFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.WorkflowRequestFragment"
+        android:label="Request a feature"
+        tools:layout="@layout/fragment_workflow_request" />
+    <fragment
+        android:id="@+id/reportBugFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.ReportBugFragment"
+        android:label="Report a Bug"
+        tools:layout="@layout/fragment_report_bug" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/singleWorkflowManagerActivity"
+        android:name="com.tnj.if_else.activities_and_fragments.activities.SingleWorkflowActivity"
+        android:label="activity_single_workflow_manager"
+        tools:layout="@layout/activity_single_workflow_manager" />
+    <navigation
+        android:id="@+id/navigation3"
+        app:startDestination="@id/tryBuiltInFragment">
+        <fragment
+            android:id="@+id/tryBuiltInFragment"
+            android:name="com.tnj.if_else.activities_and_fragments.fragments.TryBuiltInFragment"
+            android:label="Built-in workflows"
+            tools:layout="@layout/fragment_try_built_in">
+            <action
+                android:id="@+id/action_tryBuiltInFragment_to_profilerSettingsActivity"
+                app:destination="@id/profilerSettingsActivity">
+            </action>
+        </fragment>
+        <activity
+            android:id="@+id/profilerSettingsActivity"
+            android:name="com.tnj.if_else.activities_and_fragments.activities.ProfilerSettingsActivity"
+            android:label="activity_profiler_settings"
+            tools:layout="@layout/activity_profiler_settings" />
+    </navigation>
+</navigation>

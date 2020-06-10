@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp14"
+    android:layout_marginTop="7dp"
+    android:layout_marginEnd="@dimen/dp14"
+    android:layout_marginBottom="7dp"
+    android:background="?attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:id="@+id/workflow_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_header"
+        android:paddingStart="@dimen/dp12"
+        android:paddingTop="@dimen/dp10"
+        android:paddingEnd="@dimen/dp12"
+        android:paddingBottom="@dimen/dp10"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/bi_title"
+            style="@style/workflow_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/progressForStatus"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/dp20" />
+
+        <ProgressBar
+            android:id="@+id/progressForStatus"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/biStatusEnable"
+            android:scaleX="0.8"
+            android:scaleY="0.8" />
+
+        <Switch
+            android:id="@+id/biStatusEnable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_footer"
+        android:padding="@dimen/dp12"
+        app:layout_constraintTop_toBottomOf="@id/workflow_header">
+
+        <TextView
+            android:id="@+id/bi_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_mono"
+            android:textSize="@dimen/dp10"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/trigger_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp16"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/bi_description">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/bi_trigger_icon"
+                android:layout_width="@dimen/dp22"
+                android:layout_height="@dimen/dp22"
+                app:materialIconColor="#606060" />
+
+            <TextView
+                android:id="@+id/bi_trigger_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_mono"
+                android:textSize="@dimen/dp10"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/action_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/trigger_layout">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/bi_action_icon"
+                android:layout_width="@dimen/dp22"
+                android:layout_height="@dimen/dp22"
+                app:materialIconColor="#606060" />
+
+            <TextView
+                android:id="@+id/bi_action_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_mono"
+                android:textSize="@dimen/dp10"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/action_layout">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/bi_criteria_icon"
+                android:layout_width="@dimen/dp22"
+                android:layout_height="@dimen/dp22"
+                app:materialIconColor="#606060" />
+
+            <TextView
+                android:id="@+id/bi_criteria_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_mono"
+                android:textSize="@dimen/dp10"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

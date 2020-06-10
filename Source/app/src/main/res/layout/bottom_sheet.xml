@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import
+            alias="view"
+            type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.tnj.if_else.viewModels.CookWorkflowModel" />
+
+        <variable
+            name="selectedAction"
+            type="com.tnj.if_else.adapters.EntitySelection" />
+
+        <variable
+            name="selectedTrigger"
+            type="com.tnj.if_else.adapters.EntitySelection" />
+
+        <variable
+            name="selectedCriterias"
+            type="com.tnj.if_else.adapters.EntitySelection" />
+
+        <variable
+            name="actionCountNo"
+            type="androidx.databinding.ObservableInt" />
+
+        <variable
+            name="triggerCountNo"
+            type="androidx.databinding.ObservableInt" />
+
+        <variable
+            name="criteriaCountNo"
+            type="androidx.databinding.ObservableInt" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        style="@style/myBottomSheetStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/sheet_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottomSheetCollapsedHeight"
+                android:background="@color/colorBlack"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/dp10"
+                    android:src="@drawable/ic_collapse"
+                    android:tint="@color/colorWhite" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/triggerCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="Trigger:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp12" />
+
+                    <TextView
+                        android:id="@+id/triggerCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="@{String.valueOf(triggerCountNo)}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/actionCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="Action:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp12" />
+
+                    <TextView
+                        android:id="@+id/actionCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="@{String.valueOf(actionCountNo)}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="60dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/criteriaCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="Criteria:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp12" />
+
+                    <TextView
+                        android:id="@+id/criteriaCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_mono"
+                        android:text="@{String.valueOf(criteriaCountNo)}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp14" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/triggerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:padding="@dimen/dp10"
+                android:text="TRIGGERS"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp12"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/sheet_header" />
+
+            <com.google.android.material.button.MaterialButton
+                android:scaleY="0.8"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:scaleX="0.8"
+                android:text="Clear"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/roboto_mono"
+                android:id="@+id/trigger_remove_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sheet_header"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/noTrigger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:paddingStart="@dimen/dp10"
+                android:paddingBottom="@dimen/dp10"
+                android:text="None"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp10"
+                android:visibility="@{triggerCountNo == 0 ? view.VISIBLE : view.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/triggerText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/selectedTriggers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadingEdgeLength="@dimen/dp20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp10"
+                android:requiresFadingEdge="horizontal"
+                app:adapter="@{selectedTrigger}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/triggerText" />
+
+            <TextView
+                android:id="@+id/actionsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:padding="@dimen/dp10"
+                android:text="ACTIONS"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp12"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/selectedTriggers" />
+
+            <com.google.android.material.button.MaterialButton
+                android:scaleY="0.8"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:scaleX="0.8"
+                android:text="Clear"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/roboto_mono"
+                android:id="@+id/action_remove_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selectedTriggers"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/noAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:paddingStart="@dimen/dp10"
+                android:paddingBottom="@dimen/dp10"
+                android:text="None"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp10"
+                android:visibility="@{actionCountNo == 0 ? view.VISIBLE : view.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actionsText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/selectedActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadingEdgeLength="@dimen/dp20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp10"
+                android:requiresFadingEdge="horizontal"
+                app:adapter="@{selectedAction}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/actionsText" />
+
+            <TextView
+                android:id="@+id/criteriaText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:padding="@dimen/dp10"
+                android:text="CRITERIA"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp12"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/selectedActions" />
+
+            <com.google.android.material.button.MaterialButton
+                android:scaleY="0.8"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:scaleX="0.8"
+                android:text="Clear"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/roboto_mono"
+                android:id="@+id/criteria_remove_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selectedActions"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/noCriteria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono"
+                android:paddingStart="@dimen/dp10"
+                android:paddingBottom="@dimen/dp10"
+                android:text="None"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp10"
+                android:visibility="@{criteriaCountNo == 0 ? view.VISIBLE : view.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/criteriaText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/selectedCriteria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadingEdgeLength="@dimen/dp20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp10"
+                android:requiresFadingEdge="horizontal"
+                app:adapter="@{selectedCriterias}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/criteriaText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

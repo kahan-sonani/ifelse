@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".app.cookWorkflowActivity.CookWorkflowFragment">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            style="@style/cook_workflow_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tabLayoutHeight">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_trigger_icon"
+                android:text="TRIGGER" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_action_icon"
+                android:text="ACTION" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_criteria_icon"
+                android:text="CRITERIA" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/tabPages"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/tabLayoutHeight" />
+
+        <include
+            android:id="@+id/bottom_sheet"
+            layout="@layout/bottom_sheet" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/save_workflow_configuration_button"
+            app:elevation="@dimen/dp12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp16"
+            android:layout_marginBottom="70dp"
+            android:elevation="@dimen/dp20"
+            android:src="@drawable/ic_next"
+            app:layout_anchor="@id/bottom_sheet"
+            app:layout_anchorGravity="top|end" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

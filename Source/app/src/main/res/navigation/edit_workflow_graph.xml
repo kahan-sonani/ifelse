@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_workflow_graph"
+    app:startDestination="@id/editCustomWorkflowDetailsFragment">
+
+    <fragment
+        android:id="@+id/editBuiltInWorkflowFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.EditBuiltInWorkflowFragment"
+        android:label="Built-in Workflow" />
+    <fragment
+        android:id="@+id/editCustomWorkflowDetailsFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.EditCustomWorkflowDetailsFragment"
+        android:label="Custom Workflow" />
+</navigation>

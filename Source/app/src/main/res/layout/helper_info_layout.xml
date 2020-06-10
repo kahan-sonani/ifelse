@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp20"
+            android:background="@drawable/card_background"
+            android:paddingStart="@dimen/dp20"
+            android:paddingBottom="@dimen/dp20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/note_close"
+                android:layout_marginEnd="4dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:text="CLOSE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/intro_image"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="@dimen/dp22"
+                android:src="@drawable/intro_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:fontFamily="@font/hind_light"
+                android:includeFontPadding="false"
+                android:text="Hey There,"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dp26"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/intro_image" />
+
+            <TextView
+                android:id="@+id/note_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/dp20"
+                android:fontFamily="@font/hind_light"
+                android:text="@string/intro_helper_text_for_built_in_workflow"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dp12"
+                app:layout_constraintTop_toBottomOf="@+id/note" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/note_try_it"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp12"
+                android:backgroundTint="@color/colorYellow"
+                android:text="TRY IT"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintTop_toBottomOf="@id/note_description"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

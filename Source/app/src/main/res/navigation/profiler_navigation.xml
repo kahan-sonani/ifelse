@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profiler_navigation"
+    app:startDestination="@id/profilerListFragment">
+    <fragment
+        android:id="@+id/profilerListFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.ProfilerListFragment"
+        android:label="ProfilerListFragment">
+        <action
+            android:id="@+id/action_profilerListFragment_to_profilerSettings"
+            app:destination="@id/profilerSettings"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilerSettings"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.ProfilerSettings"
+        android:label="ProfilerSettings">
+        <action
+            android:id="@+id/action_profilerSettings_to_profilerListFragment"
+            app:destination="@id/profilerListFragment" />
+    </fragment>
+</navigation>

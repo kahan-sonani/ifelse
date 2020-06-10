@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_graph"
+    app:startDestination="@id/loginEmailFragment2">
+
+    <fragment
+        android:id="@+id/loginEmailFragment2"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.LoginEmailFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_login_email">
+        <action
+            android:id="@+id/action_loginEmailFragment2_to_loginPasswordFragment2"
+            app:destination="@id/loginPasswordFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_loginEmailFragment2_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_loginEmailFragment2_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginPasswordFragment2"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.LoginPasswordFragment"
+        android:label=""
+        tools:layout="@layout/fragment_login_password">
+        <action
+            android:id="@+id/action_loginPasswordFragment2_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.SignUpFragment"
+        android:label=""
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.tnj.if_else.activities_and_fragments.activities.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>

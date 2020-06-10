@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/try_built_in_workflows"
+        android:orderInCategory="1"
+        android:title="Try built-in workflows"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/enable_all_workflow"
+        android:orderInCategory="2"
+        android:title="Enable all workflows"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/disable_all_workflow"
+        android:orderInCategory="3"
+        android:title="Disable all workflows"
+        app:showAsAction="never" />
+</menu>

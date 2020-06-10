@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/single_workflow_graph"
+    app:startDestination="@id/cookWorkflowFragment">
+    <fragment
+        android:id="@+id/enterWorkflowDetailsFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.EnterWorkflowDetailsFragment"
+        android:label="Enter details" />
+    <fragment
+        android:id="@+id/cookWorkflowFragment"
+        android:name="com.tnj.if_else.activities_and_fragments.fragments.CookWorkflowFragment"
+        android:label="Cook workflow">
+        <action
+            android:id="@+id/action_cookWorkflowFragment_to_enterWorkflowDetailsFragment"
+            app:destination="@id/enterWorkflowDetailsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+</navigation>

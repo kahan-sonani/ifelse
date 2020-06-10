@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/colorBlack</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">@color/colorYellow</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGray">#919191</color>
+    <color name="colorPurple">#6200EE</color>
+    <color name="colorPurpleLight">#916dd5</color>
+    <color name="colorPurpleTransparent">#ECE2FB</color>
+    <color name="colorPurpleDark">#3e206d</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorAmber">#FFA000</color>
+    <color name="colorYellow">#FBC02D</color>
+    <color name="colorLightGray">#dddddd</color>
+    <color name="colorDarkGray">#313131</color>
+    <color name="colorYellowLight">#aaffe082</color>
+    <color name="colorLightBlack">#D0D0D0</color>
+    <color name="colorBlueGrayLight">#cfd8dc</color>
+    <color name="colorBlueGrayLightTrans">#5acfd8dc</color>
+    <color name="colorBlueGray">#b0bec5</color>
+
+    <color name="workflow_color1">#880e4f</color>
+    <color name="workflow_color3">#8bc34a</color>
+    <color name="workflow_color2">#f44336</color>
+    <color name="workflow_color4">#212121</color>
+    <color name="workflow_color5">#0091ea</color>
+    <color name="workflow_color6">#2f294f</color>
+    <color name="workflow_color7">#388e36</color>
+    <color name="workflow_color8">#ef6c00</color>
+    <color name="workflow_color9">#2962ff</color>
+    <color name="workflow_color9_transparent">#332962ff</color>
+    <color name="workflow_color10">#00A3AD</color>
+    <color name="workflow_colorDefault">@color/colorGray</color>
+
+    <color name="dayPressed">@color/colorGray</color>
+    <color name="daySelected">@color/workflow_color8</color>
+    <color name="daySelectedTextColor">@android:color/white</color>
+    <color name="dayDeselected">#ddd</color>
+    <color name="dayDeselectedTextColor">@android:color/black</color>
+
+    <!-- Customizing colors for disabled days-->
+    <color name="daySelectedAndDisabled">#43444F</color>
+    <color name="daySelectedAndDisabledTextColor">@color/daySelectedTextColor</color>
+    <color name="dayDeselectedAndDisabled">@color/dayDeselected</color>
+    <color name="dayDeselectedAndDisabledTextColor">@android:color/darker_gray</color>
+
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginStart="@dimen/dp14"
+        android:layout_marginEnd="@dimen/dp14"
+        android:elevation="4dp"
+        app:cardBackgroundColor="@color/colorLightGray">
+
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dp10">
+
+            <LinearLayout
+                android:id="@+id/timeRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="@font/questrial"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="0.09"
+                    android:textColor="#666"
+                    android:id="@+id/startTime"
+                    android:layout_width="wrap_content"
+                    android:text="10:00"
+                    android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="0.1"
+                    android:text=" TO"
+                    android:textColor="#666"
+                    android:textSize="10sp" />
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endTime"
+                    android:layout_width="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/questrial"
+                    android:letterSpacing="0.1"
+                    android:text="10:00"
+                    android:textColor="#666"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_alignEnd="@id/profile_delete"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
+                android:text="eagviohwneolbvkwebv"
+                android:fontFamily="@font/roboto_mono"
+                android:textSize="@dimen/dp12"
+                android:layout_marginEnd="@dimen/dp20"
+                android:textColor="#666"
+                android:layout_marginStart="2dp"
+                android:id="@+id/days"
+                android:layout_below="@id/timeRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_close_black"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_width="wrap_content"
+                android:id="@+id/profile_delete"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
