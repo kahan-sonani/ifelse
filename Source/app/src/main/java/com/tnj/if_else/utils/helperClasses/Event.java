@@ -1,5 +1,7 @@
 package com.tnj.if_else.utils.helperClasses;
 
+import android.util.Log;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -24,6 +26,10 @@ public class Event<T> extends MutableLiveData<T> {
     @MainThread
     @Override
     public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
+        Log.i("ifelse",toString() + " observe method called!");
+
+        if(hasActiveObservers())
+            Log.i("ifelse","trying to assign multiple observers to same instance of liveData, This operation is not supported.");
         super.observe(owner, t -> {
             if (isHandled.compareAndSet(false, true))
                 observer.onChanged(t);
