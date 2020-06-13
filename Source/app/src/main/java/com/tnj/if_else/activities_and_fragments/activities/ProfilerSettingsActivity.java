@@ -14,7 +14,7 @@ import com.tnj.if_else.R;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflowDetailsProxy;
 import com.tnj.if_else.databinding.ActivityProfilerSettingsBinding;
 import com.tnj.if_else.utils.UI.UICompatibility;
-import com.tnj.if_else.utils.lookup.ColorUtility;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 import com.tnj.if_else.viewModels.ProfilerModel;
 
 public class ProfilerSettingsActivity extends AppCompatActivity {

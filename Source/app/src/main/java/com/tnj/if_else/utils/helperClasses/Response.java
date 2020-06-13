@@ -1,11 +1,11 @@
 package com.tnj.if_else.utils.helperClasses;
 
-import com.tnj.if_else.utils.interfaces.State;
-
-public class Response<T extends State>{
+public abstract class Response<T>{
 
     protected boolean isFinished;
     protected T response;
+
+    public abstract boolean isSuccessful();
 
     public boolean isFinished() {
         return isFinished;
@@ -18,19 +18,9 @@ public class Response<T extends State>{
 
     public Response(){
         isFinished = false;
-        response = (T) new NoState();
-    }
-
-    public Response(T value){
-        response = value;
     }
 
     public T getResponse() {
         return response;
-    }
-
-    public Response<T> setResponse(T response) {
-        this.response = response;
-        return this;
     }
 }

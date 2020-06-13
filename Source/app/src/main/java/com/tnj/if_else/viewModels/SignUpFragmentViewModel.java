@@ -1,34 +1,27 @@
 package com.tnj.if_else.viewModels;
 
+import android.app.Application;
+
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Transformations;
 
 import com.tnj.if_else.firebaseRepository.AuthRepository;
+import com.tnj.if_else.utils.enums.AuthSuccessResponse;
 import com.tnj.if_else.utils.enums.ValidationErrors;
 import com.tnj.if_else.utils.helperClasses.Event;
-import com.tnj.if_else.utils.helperClasses.validator.CompareValidator;
-import com.tnj.if_else.utils.helperClasses.validator.EmailValidator;
-import com.tnj.if_else.utils.helperClasses.validator.PasswordValidator;
-import com.tnj.if_else.utils.interfaces.ErrorResponse;
+import com.tnj.if_else.utils.interfaces.State;
 
-public class SignUpFragmentViewModel extends ViewModel {
+public class SignUpFragmentViewModel extends AndroidViewModel {
 
-    private EmailValidator emailValidator;
-
-    private PasswordValidator passwordValidator;
-
-    private CompareValidator confirmPasswordValidator;
+    private ObservableBoolean loading;
 
     public LiveData<Boolean> onCreateAccount;
 
-    public Event<ErrorResponse> errorResponseEvent;
-
-    public ObservableField<ValidationErrors> emailError;
-
-    public ObservableField<ValidationErrors> passwordError;
-
-    public ObservableField<ValidationErrors> confirmError;
+    private ObservableField<String> errorResponseEvent;
 
     private AuthRepository userRepo;
 
@@ -39,23 +32,46 @@ public class SignUpFragmentViewModel extends ViewModel {
     private ObservableField<String> confirmPassword;
 
 
-    public SignUpFragmentViewModel() {
-        emailValidator = new EmailValidator();
-        passwordValidator = new PasswordValidator();
-        confirmPasswordValidator = new CompareValidator();
+    public ObservableField<String> getErrorResponseEvent() {
+        return errorResponseEvent;
+    }
 
-        errorResponseEvent = new Event<>();
+    public ObservableBoolean getLoading() {
+        return loading;
+    }
+
+    public SignUpFragmentViewModel(Application application) {
+        super(application);
+
+        loading = new ObservableBoolean();
+
+        errorResponseEvent = new ObservableField<>(ValidationErrors.NO_ERROR.getMessage(application.getApplicationContext()));
         onCreateAccount = new Event<>();
-
-        emailError = new ObservableField<>(ValidationErrors.NO_ERROR);
-        passwordError = new ObservableField<>(ValidationErrors.NO_ERROR);
-        confirmError = new ObservableField<>(ValidationErrors.NO_ERROR);
 
         email = new ObservableField<>("");
         password = new ObservableField<>("");
         confirmPassword = new ObservableField<>("");
-
         userRepo = AuthRepository.getInstance();
+
+        email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                validateFields(email.get());
+            }
+        });
+
+        password.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                validateFields(password.get());
+            }
+        });
+        confirmPassword.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                validateFields(confirmPassword.get());
+            }
+        });
     }
 
 
@@ -76,21 +92,23 @@ public class SignUpFragmentViewModel extends ViewModel {
     }
 
     public void createNewUser() {
-        emailError.set(emailValidator.validate(email.get()).getError());
-        passwordError.set(passwordValidator.validate(password.get()).getError());
-        confirmError.set(confirmPasswordValidator.validate(password.get(),confirmPassword.get()).getError());
 
-        /*if(emailError.get() == ValidationErrors.NO_ERROR
-                && passwordError.get() == ValidationErrors.NO_ERROR
-                && confirmError.get() == ValidationErrors.NO_ERROR) {
-            onCreateAccount = Transformations.map(UseCase.createSingleLiveDataEventFromData(userRepo.createUserWithEmailAndPassword(email.get(), password.get())),
-                    input -> {
-                        if (input.getResponse() instanceof ErrorResponse) {
-                            errorResponseEvent.setValue((ErrorResponse) input.getResponse());
-                            return false;
-                        }
-                        return input.getResponse() == SuccessResponse.CREATE_ACCOUNT_SUCCESS;
-                    });
-        }*/
+        loading.set(true);
+        onCreateAccount = Transformations.map(userRepo.createUserWithEmailAndPassword(email.get(), password.get(),confirmPassword.get()),
+                input -> {
+                    loading.set(!input.isFinished());
+                    if (!input.isSuccessful()) {
+                        errorResponseEvent.set(((State) input.getResponse()).getMessage(getApplication().getApplicationContext()));
+                        return false;
+                    } else {
+                        errorResponseEvent.set(((State) input.getResponse()).getMessage(getApplication().getApplicationContext()));
+                        return input.getResponse() == AuthSuccessResponse.CREATE_ACCOUNT_SUCCESS;
+                    }
+                });
+    }
+
+    private void validateFields(String value) {
+        errorResponseEvent.set("".equals(value) ? ValidationErrors.REQUIRED.getMessage(getApplication().getApplicationContext())
+                : ValidationErrors.NO_ERROR.getMessage(getApplication().getApplicationContext()));
     }
 }

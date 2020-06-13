@@ -1,7 +1,6 @@
-package com.tnj.if_else.utils.lookup;
+package com.tnj.if_else.utils.helperClasses;
 
 import com.tnj.if_else.R;
-import com.tnj.if_else.utils.helperClasses.Color;
 
 import java.util.Random;
 

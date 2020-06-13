@@ -7,6 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tabLayoutHeight">70dp</dimen>
     <dimen name="bottomSheetCollapsedHeight">50dp</dimen>
+    <dimen name="searchViewHeight">60dp</dimen>
 
     <dimen name="slider_thumb_size">8dp</dimen>
 

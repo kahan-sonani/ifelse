@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.common.ChangeEventType;
+import com.firebase.ui.firestore.ChangeEventListener;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.card.MaterialCardView;
@@ -21,31 +22,26 @@ import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflow;
 import com.tnj.if_else.databinding.BiWorkflowListLayoutBinding;
 import com.tnj.if_else.utils.interfaces.OnWorkflowTouchListener;
+import com.tnj.if_else.viewModels.HomeFragmentViewModel;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
-import java.util.ArrayList;
-
-public class BIHomeAdapter extends FirestoreRecyclerAdapter<BuiltInWorkflow, RecyclerView.ViewHolder>{
+public class BIHomeAdapter extends FirestoreRecyclerAdapter<BuiltInWorkflow, RecyclerView.ViewHolder> implements ChangeEventListener {
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_DATA = 1;
 
     private View header;
+    private HomeFragmentViewModel model;
     private MergeAdapter joiner;
     private OnWorkflowTouchListener<BuiltInWorkflow> actionListener;
-    private ArrayList<String> selectedWorkflows;
-
+    
     public BIHomeAdapter(@NonNull FirestoreRecyclerOptions<BuiltInWorkflow> options) {
         super(options);
     }
 
-    public void setSelectedWorkflows(ArrayList<String> selectedWorkflows) {
-        this.selectedWorkflows = selectedWorkflows;
-    }
-
-    public ArrayList<String> getSelectedWorkflows() {
-        return selectedWorkflows;
+    public void setModel(HomeFragmentViewModel model) {
+        this.model = model;
     }
 
     public void setJoiner(MergeAdapter joiner) {
@@ -75,7 +71,8 @@ public class BIHomeAdapter extends FirestoreRecyclerAdapter<BuiltInWorkflow, Rec
     protected void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i, @NonNull BuiltInWorkflow builtInWorkflow) {
         if(getItemViewType(i) == TYPE_DATA) {
             BuiltInWorkflowHolder biHomeWorkflowHolder = ((BuiltInWorkflowHolder) viewHolder);
-            biHomeWorkflowHolder.binding.getRoot().setSelected(selectedWorkflows.contains(builtInWorkflow.getId()));
+            biHomeWorkflowHolder.binding.getRoot().setSelected(model.getCustomWorkflowAdapterConfig()
+                    .getSelectedWorkflows().contains(builtInWorkflow.getId()));
             String state = builtInWorkflow.getSettings().getState();
             biHomeWorkflowHolder.binding.workflowDetails.workflowStatus.setText(state);
             biHomeWorkflowHolder.readStatus(biHomeWorkflowHolder, state, builtInWorkflow);
@@ -86,8 +83,9 @@ public class BIHomeAdapter extends FirestoreRecyclerAdapter<BuiltInWorkflow, Rec
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+        model.isBuiltInWorkflowListEmpty(getItemCount() == 0);
         if(header != null)
-            header.setVisibility(getItemCount() == 0 ? View.INVISIBLE : View.VISIBLE);
+            header.setVisibility(getItemCount() == 0 ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -163,9 +161,10 @@ public class BIHomeAdapter extends FirestoreRecyclerAdapter<BuiltInWorkflow, Rec
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return super.getItemCount() + 1;
+        return super.getItemCount() == 0 ? 0 : getSnapshots().size() + 1;
     }
 
     @NonNull

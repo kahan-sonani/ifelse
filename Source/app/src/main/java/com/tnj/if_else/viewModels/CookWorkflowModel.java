@@ -11,15 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tnj.if_else.activities_and_fragments.fragments.CookWorkflowFragment;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 import com.tnj.if_else.utils.helperClasses.EntitySet;
-import com.tnj.if_else.utils.lookup.ColorUtility;
-import com.tnj.if_else.utils.helperClasses.validator.RequiredValidator;
 
 import java.util.ArrayList;
 
 public class CookWorkflowModel extends AndroidViewModel {
 
-    private RequiredValidator titleValidator;
     public MutableLiveData<Boolean> onSelectAction;
     public MutableLiveData<Boolean> onSelectTrigger;
     public MutableLiveData<Boolean> onSelectCriteria;
@@ -40,7 +38,6 @@ public class CookWorkflowModel extends AndroidViewModel {
 
     public CookWorkflowModel(@NonNull Application application) {
         super(application);
-        titleValidator = new RequiredValidator();
         onSelectCriteria = new MutableLiveData<>();
         onSelectTrigger = new MutableLiveData<>();
         onSelectAction = new MutableLiveData<>();
@@ -56,11 +53,6 @@ public class CookWorkflowModel extends AndroidViewModel {
         showEntityDetails.set(false);
         showCategory.setValue(PreferenceManager.getDefaultSharedPreferences(application.getApplicationContext())
                 .getBoolean(CookWorkflowFragment.SHOW_CATEGORY, true));
-    }
-
-
-    public RequiredValidator getTitleValidator() {
-        return titleValidator;
     }
 
     public int getRandomColorForAdapter() {

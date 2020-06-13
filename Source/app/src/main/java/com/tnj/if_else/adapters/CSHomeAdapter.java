@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.common.ChangeEventType;
+import com.firebase.ui.firestore.ChangeEventListener;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.card.MaterialCardView;
@@ -21,18 +22,17 @@ import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
 import com.tnj.if_else.databinding.WorkflowListLayoutBinding;
 import com.tnj.if_else.utils.interfaces.OnWorkflowTouchListener;
+import com.tnj.if_else.viewModels.HomeFragmentViewModel;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
-import java.util.ArrayList;
-
-public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, RecyclerView.ViewHolder>{
+public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, RecyclerView.ViewHolder> implements ChangeEventListener {
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_DATA = 1;
 
+    private HomeFragmentViewModel model;
     private View header;
-    private ArrayList<String> selectedWorkflows;
     private MergeAdapter joiner;
     private OnWorkflowTouchListener<CustomWorkflow> actionListener;
 
@@ -40,12 +40,8 @@ public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, Recy
         super(options);
     }
 
-    public void setSelectedWorkflows(ArrayList<String> selectedWorkflows) {
-        this.selectedWorkflows = selectedWorkflows;
-    }
-
-    public ArrayList<String> getSelectedWorkflows() {
-        return selectedWorkflows;
+    public void setModel(HomeFragmentViewModel model) {
+        this.model = model;
     }
 
     public void setJoiner(MergeAdapter joiner) {
@@ -63,8 +59,9 @@ public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, Recy
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+        model.isCustomWorkflowListEmpty(getItemCount() == 0);
         if(header != null)
-            header.setVisibility(getItemCount() == 0 ? View.INVISIBLE : View.VISIBLE);
+            header.setVisibility(getItemCount() == 0 ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -78,7 +75,8 @@ public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, Recy
         if(getItemViewType(i) == TYPE_DATA) {
 
             CustomWorkflowHolder customWorkflowHolder = ((CustomWorkflowHolder) viewHolder);
-            customWorkflowHolder.binding.getRoot().setSelected(selectedWorkflows.contains(customWorkflow.getId()));
+            customWorkflowHolder.binding.getRoot().setSelected(model.getCustomWorkflowAdapterConfig()
+                    .getSelectedWorkflows().contains(customWorkflow.getId()));
             String state = customWorkflow.getSettings().getState();
 
             customWorkflowHolder.binding.workflowDetails.workflowStatus.setText(state);
@@ -149,6 +147,7 @@ public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, Recy
             }
         }
     }
+
     @Override
     public void onChildChanged(@NonNull ChangeEventType type, @NonNull DocumentSnapshot snapshot, int newIndex, int oldIndex) {
         newIndex = ++newIndex;
@@ -173,7 +172,7 @@ public class CSHomeAdapter extends FirestoreRecyclerAdapter<CustomWorkflow, Recy
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + 1;
+        return super.getItemCount() == 0 ? 0 : getSnapshots().size() + 1;
     }
 
     @NonNull

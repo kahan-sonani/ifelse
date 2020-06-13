@@ -1,30 +1,35 @@
 package com.tnj.if_else.viewModels;
 
+import android.app.Application;
+
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Transformations;
 
 import com.tnj.if_else.firebaseRepository.AuthRepository;
+import com.tnj.if_else.utils.enums.AuthSuccessResponse;
+import com.tnj.if_else.utils.enums.ValidationErrors;
 import com.tnj.if_else.utils.helperClasses.Event;
-import com.tnj.if_else.utils.helperClasses.validator.RequiredValidator;
-import com.tnj.if_else.utils.interfaces.ErrorResponse;
+import com.tnj.if_else.utils.interfaces.State;
 
-public class LoginPasswordFragmentViewModel extends ViewModel {
-
-    private RequiredValidator requiredValidator;
+public class LoginPasswordFragmentViewModel extends AndroidViewModel {
 
     private AuthRepository userRepo;
 
     public LiveData<Boolean> loginSuccess;
-    
-    public ObservableField<ErrorResponse> somethingWentWrong;
+
+    private ObservableBoolean loading;
+
+    private ObservableField<String> somethingWentWrong;
 
     public LiveData<Boolean> passwordResetLinkSentSuccessfully;
 
     private ObservableField<String> password;
 
     private ObservableField<String> email;
-
 
     public ObservableField<String> getEmail() {
         return email;
@@ -38,42 +43,68 @@ public class LoginPasswordFragmentViewModel extends ViewModel {
         return password;
     }
 
-    public LoginPasswordFragmentViewModel(){
+    public ObservableBoolean getLoading() {
+        return loading;
+    }
 
-        somethingWentWrong = new ObservableField<>();
+    public ObservableField<String> getSomethingWentWrong() {
+        return somethingWentWrong;
+    }
+
+    public LoginPasswordFragmentViewModel(Application application) {
+
+        super(application);
+        loading = new ObservableBoolean(false);
+        somethingWentWrong = new ObservableField<>(ValidationErrors.NO_ERROR.getMessage(application.getApplicationContext()));
+
         loginSuccess = new Event<>();
-        passwordResetLinkSentSuccessfully  = new Event<>(); 
-        requiredValidator = new RequiredValidator();
+        passwordResetLinkSentSuccessfully = new Event<>();
+
         userRepo = AuthRepository.getInstance();
+
         password = new ObservableField<>("");
         email = new ObservableField<>("");
+
+        password.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                somethingWentWrong.set("".equals(password.get()) ? ValidationErrors.REQUIRED.getMessage(application.getApplicationContext())
+                        : ValidationErrors.NO_ERROR.getMessage(application.getApplicationContext()));
+            }
+        });
 
     }
 
     public void loginUserWithEmailAndPassword() {
 
-        somethingWentWrong.set(requiredValidator.validate(email.get()).getError());
-
-        /*if(requiredValidator.getError() == ValidationErrors.NO_ERROR) {
-            loginSuccess = Transformations.map(,),
-                    input -> {
-                        if (input.getResponse() instanceof ErrorResponse) {
-                            somethingWentWrong.set((ErrorResponse) input.getResponse());
-                            return false;
-                        }
-                        return input.getResponse() == SuccessResponse.SIGN_IN_SUCCESSFUL;
-                    });
-        }*/
+        loading.set(true);
+        loginSuccess = Transformations.map(userRepo.loginUserWithEmailAndPassword(email.get(), password.get()),
+                input -> {
+                    loading.set(!input.isFinished());
+                    if (!input.isSuccessful()) {
+                        somethingWentWrong.set((((State) input.getResponse()))
+                                .getMessage(getApplication().getApplicationContext()));
+                        return false;
+                    } else {
+                        somethingWentWrong.set(ValidationErrors.NO_ERROR.getMessage(getApplication().getApplicationContext()));
+                        return input.getResponse() == AuthSuccessResponse.SIGN_IN_SUCCESSFUL;
+                    }
+                });
     }
 
     public void sendResetPasswordLink() {
-        /*passwordResetLinkSentSuccessfully = Transformations.map(UseCase.createSingleLiveDataEventFromData(userRepo.sendResetPasswordLink(email.get())),
+        loading.set(true);
+        passwordResetLinkSentSuccessfully = Transformations.map(userRepo.sendResetPasswordLink(email.get()),
                 input -> {
-                    if(input.getResponse() instanceof ErrorResponse){
-                        somethingWentWrong.set((ErrorResponse) input.getResponse());
+                    loading.set(!input.isFinished());
+                    if (!input.isSuccessful()) {
+                        somethingWentWrong.set((((State) input.getResponse())).
+                                getMessage(getApplication().getApplicationContext()));
                         return false;
+                    } else {
+                        somethingWentWrong.set(ValidationErrors.NO_ERROR.getMessage(getApplication().getApplicationContext()));
+                        return input.getResponse() == AuthSuccessResponse.PASSWORD_RESET_LINK_SENT;
                     }
-                    return input.getResponse() == SuccessResponse.PASSWORD_RESET_LINK_SENT;
-                });*/
+                });
     }
 }

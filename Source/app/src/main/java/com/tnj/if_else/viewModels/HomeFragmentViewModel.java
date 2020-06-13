@@ -1,5 +1,9 @@
 package com.tnj.if_else.viewModels;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.firebase.ui.firestore.FirestoreArray;
@@ -8,34 +12,60 @@ import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflow;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
 import com.tnj.if_else.firebaseRepository.FirebaseRepository;
-import com.tnj.if_else.firebaseRepository.HomeFragmentRepository;
 import com.tnj.if_else.firebaseRepository.schema.FirebaseConfig;
-import com.tnj.if_else.utils.firebase.BuiltInWorkflowParser;
-import com.tnj.if_else.utils.firebase.CustomWorkflowParser;
-import com.tnj.if_else.utils.interfaces.ResultSet;
+import com.tnj.if_else.firebaseRepository.schema.WorkflowSchema;
+import com.tnj.if_else.utils.helperClasses.BuiltInWorkflowParser;
+import com.tnj.if_else.utils.helperClasses.CustomWorkflowParser;
 
 public class HomeFragmentViewModel extends ViewModel implements AdapterConfig.toggleListener{
 
     private AdapterConfig<BuiltInWorkflow> builtInWorkflowAdapterConfig;
+
     private AdapterConfig<CustomWorkflow>  customWorkflowAdapterConfig;
 
-    private HomeFragmentRepository repository;
+    private FirebaseRepository repository;
+
     public boolean didUserCloseDialog;
-    public boolean isDialogShown;
+
+    private MutableLiveData<Boolean> builtInWorkflowList;
+
+    private MutableLiveData<Boolean> customWorkflowList;
+
+    private MediatorLiveData<Boolean> isListEmpty;
 
     private Workflow currentSelectedWorkflow;
 
-    public HomeFragmentViewModel() {
-        repository = new HomeFragmentRepository();
+    public LiveData<Boolean> isListEmpty() {
+        return isListEmpty;
+    }
 
-        builtInWorkflowAdapterConfig = new AdapterConfig<>(new FirestoreArray<>(repository.getBuiltInWorkflowQuery(), BuiltInWorkflowParser::parseSnapshot));
-        customWorkflowAdapterConfig = new AdapterConfig<>(new FirestoreArray<>(repository.getCustomWorkflowQuery(), CustomWorkflowParser::parseSnapshot));;
+    public void isBuiltInWorkflowListEmpty(boolean value) {
+        builtInWorkflowList.setValue(value);
+    }
+
+    public void isCustomWorkflowListEmpty(boolean value) {
+        customWorkflowList.setValue(value);
+    }
+
+    public HomeFragmentViewModel() {
+        repository = FirebaseRepository.getInstance();
+
+        builtInWorkflowAdapterConfig = new AdapterConfig<>(new FirestoreArray<>(repository.builtIn().queryOrderByState(true), BuiltInWorkflowParser::parseSnapshot));
+        customWorkflowAdapterConfig = new AdapterConfig<>(new FirestoreArray<>(repository.custom().queryOrderByState(true), CustomWorkflowParser::parseSnapshot));
 
         builtInWorkflowAdapterConfig.setListener(this);
         customWorkflowAdapterConfig.setListener(this);
 
+        builtInWorkflowList = new MutableLiveData<>(false);
+        customWorkflowList = new MutableLiveData<>(false);
+
+        isListEmpty = new MediatorLiveData<>();
+
+        Observer<Boolean> observer = aBoolean -> isListEmpty.setValue(builtInWorkflowList.getValue() && customWorkflowList.getValue());
+        isListEmpty.addSource(builtInWorkflowList,observer);
+        isListEmpty.addSource(customWorkflowList,observer);
+
         didUserCloseDialog = false;
-        isDialogShown = false;
     }
 
     public Workflow getCurrentSelectedWorkflow() {
@@ -51,7 +81,7 @@ public class HomeFragmentViewModel extends ViewModel implements AdapterConfig.to
     }
 
     public void deleteSelectedBuiltInWorkflow(){
-        FirebaseRepository.getInstance().builtIn()
+        repository.builtIn()
                 .deleteWorkflow(builtInWorkflowAdapterConfig.getSelectedWorkflows().toArray(new String[0]));
         builtInWorkflowAdapterConfig.getSelectedWorkflows().clear();
     }
@@ -66,28 +96,24 @@ public class HomeFragmentViewModel extends ViewModel implements AdapterConfig.to
         customWorkflowAdapterConfig.getSelectedWorkflows().clear();
     }
 
-    public void updateStateForBuiltInWorkflow(ResultSet<Boolean> listener , String value){
-        /*FirebaseRepository.getInstance().builtIn()
-                .updateWorkflow(currentSelectedWorkflow.getId(),listener,
-                        WorkflowSchema.STATE,value);*/
+    public void updateStateForBuiltInWorkflow(String value){
+        repository.builtIn()
+                .updateWorkflow(currentSelectedWorkflow.getId(),
+                        WorkflowSchema.STATE,value);
     }
 
-    public void updateStateForCustomWorkflow(ResultSet<Boolean> listener , String state){
-        /*FirebaseRepository.getInstance().custom()
-                .updateWorkflow(currentSelectedWorkflow.getId(),listener,
-                        WorkflowSchema.STATE,state);*/
+    public void updateStateForCustomWorkflow(String state){
+        repository.custom()
+                .updateWorkflow(currentSelectedWorkflow.getId(),
+                        WorkflowSchema.STATE,state);
 
     }
 
-    public void disableEnableAllWorkflow(FirebaseConfig.UPDATE update , ResultSet<Boolean> listener){
-        /*FirebaseRepository.getInstance().custom()
-                .disableEnableAllWorkflow(update, listener);
-        FirebaseRepository.getInstance().builtIn()
-                .disableEnableAllWorkflow(update,listener);*/
-    }
-
-    public void isListEmpty(ResultSet<Boolean> listener){
-        //repository.isListEmpty(listener);
+    public void disableEnableAllWorkflow(FirebaseConfig.UPDATE update){
+       repository.custom()
+                .disableEnableAllWorkflow(update);
+        repository.builtIn()
+                .disableEnableAllWorkflow(update);
     }
 
     @Override

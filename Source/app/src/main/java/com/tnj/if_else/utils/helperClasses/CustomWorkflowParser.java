@@ -1,4 +1,4 @@
-package com.tnj.if_else.utils.firebase;
+package com.tnj.if_else.utils.helperClasses;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.tnj.if_else.architecture.baseLevelEntities.Action;
@@ -7,7 +7,6 @@ import com.tnj.if_else.architecture.baseLevelEntities.Trigger;
 import com.tnj.if_else.architecture.baseLevelEntities.WorkflowSettingsProxy;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflowDetailsProxy;
-import com.tnj.if_else.utils.helperClasses.Color;
 import com.tnj.if_else.firebaseRepository.schema.WorkflowSchema;
 
 import java.util.ArrayList;

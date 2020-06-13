@@ -43,7 +43,6 @@ public class AdapterConfig<T extends Workflow> implements WorkflowActionModes {
     public void setSnapshotArray(ObservableSnapshotArray<T> snapshotArray) {
         this.snapshotArray = snapshotArray;
     }
-
     public ObservableSnapshotArray<T> getSnapshotArray() {
         return snapshotArray;
     }

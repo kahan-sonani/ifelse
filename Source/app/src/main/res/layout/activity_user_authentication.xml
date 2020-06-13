@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/login_graph"
-        tools:layout_editor_absoluteX="0dp" />
+        app:navGraph="@navigation/login_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

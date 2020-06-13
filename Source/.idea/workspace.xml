@@ -58,10 +58,10 @@
         <option value="valueResourceFile" />
         <option value="navigationResourceFile" />
         <option value="resourceFile" />
+        <option value="Interface" />
         <option value="layoutResourceFile" />
         <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -97,12 +97,13 @@
     <property name="adb_path" value="$USER_HOME$/Android/Sdk/platform-tools/adb" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
+    <property name="last.edited.regexp" value="kahansonani102=';.(),/././653148&gt;   &#10;" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="settings.editor.splitter.proportion" value="0.27569646" />
   </component>
   <component name="PsdUISettings">
@@ -312,10 +313,10 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1591726680217">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592046531766">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591726680217" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592046531766" />
     <state x="597" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1591350821113">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -324,69 +325,73 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="719" y="379" width="583" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1591720233727" />
-    <state x="164" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591358138909">
+    <state x="164" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591964813014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="164" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591358138909" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591723620359">
+    <state x="164" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591964813014" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591894286267">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591723620359" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591894286267" />
     <state x="690" y="267" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1591358802793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591358802793" />
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog" timestamp="1591792692008">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591792692008" />
     <state x="815" y="285" key="AndroidProcessChooserDialog" timestamp="1591627406142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="815" y="285" key="AndroidProcessChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591627406142" />
-    <state width="1877" height="347" key="GridCell.Tab.0.bottom" timestamp="1591731342849">
+    <state width="1877" height="239" key="GridCell.Tab.0.bottom" timestamp="1592054668413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.0.center" timestamp="1591731342849">
+    <state width="1877" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
+    <state width="1877" height="239" key="GridCell.Tab.0.center" timestamp="1592054668413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.0.left" timestamp="1591731342849">
+    <state width="1877" height="239" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
+    <state width="1877" height="239" key="GridCell.Tab.0.left" timestamp="1592054668412">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.0.right" timestamp="1591731342849">
+    <state width="1877" height="239" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668412" />
+    <state width="1877" height="239" key="GridCell.Tab.0.right" timestamp="1592054668413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1591731342849">
+    <state width="1877" height="239" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1591936934441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.1.center" timestamp="1591731342849">
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591936934441" />
+    <state width="1877" height="347" key="GridCell.Tab.1.center" timestamp="1591936934441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.1.left" timestamp="1591731342849">
+    <state width="1877" height="347" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591936934441" />
+    <state width="1877" height="347" key="GridCell.Tab.1.left" timestamp="1591936934441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state width="1877" height="347" key="GridCell.Tab.1.right" timestamp="1591731342849">
+    <state width="1877" height="347" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591936934441" />
+    <state width="1877" height="347" key="GridCell.Tab.1.right" timestamp="1591936934441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591731342849" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1591009914444">
+    <state width="1877" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591936934441" />
+    <state x="472" y="222" key="SettingsEditor" timestamp="1592055525409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591009914444" />
-    <state x="626" y="456" key="com.intellij.ide.util.TipDialog" timestamp="1591785778984">
+    <state x="472" y="222" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592055525409" />
+    <state x="626" y="456" key="com.intellij.ide.util.TipDialog" timestamp="1592021354539">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="626" y="456" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591785778984" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1591730757629">
+    <state x="626" y="456" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592021354539" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1591817471607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591730757629" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591789656926">
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591817471607" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592054976415">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591789656926" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592054976415" />
   </component>
 </project>

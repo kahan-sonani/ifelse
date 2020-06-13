@@ -2,218 +2,223 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profiler_settings_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_margin="@dimen/dp20"
-            android:id="@+id/profiler_start_time_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profiler_settings_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Start time"
-            app:endIconDrawable="@drawable/ic_time"
-            app:endIconMode="custom"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profiler_start_time"
-                style="@style/viewClickStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profiler_start_time_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_margin="@dimen/dp20"
-            android:id="@+id/profiler_end_time_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="End time"
-            app:endIconDrawable="@drawable/ic_time"
-            app:endIconMode="custom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profiler_start_time_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profiler_end_time"
-                style="@style/viewClickStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ca.antonious.materialdaypicker.MaterialDayPicker
-            android:id="@+id/day_picker"
-            android:layout_margin="@dimen/dp20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profiler_end_time_layout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/volume_settings"
-            android:layout_margin="@dimen/dp20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingBottom="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/day_picker">
-
-            <LinearLayout
-                android:id="@+id/layout_ring"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp20"
+                android:layout_marginTop="10dp"
+                android:hint="Start time"
+                app:endIconDrawable="@drawable/ic_time"
+                app:endIconMode="custom"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/isRing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <net.steamcrafted.materialiconlib.MaterialIconView
-                    android:id="@+id/ringIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:materialIcon="cellphone_android" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/ringer"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profiler_start_time"
+                    style="@style/viewClickStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    app:thumbRadius="@dimen/slider_thumb_size" />
-            </LinearLayout>
+                    android:textColor="@color/colorBlack" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:id="@+id/notification_layout"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profiler_end_time_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp20"
+                android:layout_marginTop="10dp"
+                android:hint="End time"
+                app:endIconDrawable="@drawable/ic_time"
+                app:endIconMode="custom"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_ring">
+                app:layout_constraintTop_toBottomOf="@id/profiler_start_time_layout">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/isNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <net.steamcrafted.materialiconlib.MaterialIconView
-                    android:id="@+id/notification_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:materialIcon="message_text" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/notification"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profiler_end_time"
+                    style="@style/viewClickStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    app:thumbRadius="@dimen/slider_thumb_size" />
-            </LinearLayout>
+                    android:textColor="@color/colorBlack" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:id="@+id/layout_voice_call"
+            <ca.antonious.materialdaypicker.MaterialDayPicker
+                android:id="@+id/day_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp20"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/notification_layout">
+                app:layout_constraintTop_toBottomOf="@id/profiler_end_time_layout" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/isVoice_call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <net.steamcrafted.materialiconlib.MaterialIconView
-                    android:id="@+id/voice_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:materialIcon="phone_in_talk" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/voice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    app:thumbRadius="@dimen/slider_thumb_size" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_media"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/volume_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp20"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="100dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_voice_call">
+                app:layout_constraintTop_toBottomOf="@id/day_picker">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/isMedia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <net.steamcrafted.materialiconlib.MaterialIconView
-                    android:id="@+id/media_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:materialIcon="music_circle" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/media"
+                <LinearLayout
+                    android:id="@+id/layout_ring"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    app:thumbRadius="@dimen/slider_thumb_size" />
-            </LinearLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:id="@+id/alarm_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_media">
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/isRing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/isAlarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        android:id="@+id/ringIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:materialIcon="cellphone_android" />
 
-                <net.steamcrafted.materialiconlib.MaterialIconView
-                    android:id="@+id/alarm_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:materialIcon="bell_ring" />
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/ringer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        app:thumbRadius="@dimen/slider_thumb_size" />
+                </LinearLayout>
 
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/alarm"
+                <LinearLayout
+                    android:id="@+id/notification_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    app:thumbRadius="@dimen/slider_thumb_size" />
-            </LinearLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_ring">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/isNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        android:id="@+id/notification_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:materialIcon="message_text" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        app:thumbRadius="@dimen/slider_thumb_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_voice_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/notification_layout">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/isVoice_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        android:id="@+id/voice_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:materialIcon="phone_in_talk" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/voice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        app:thumbRadius="@dimen/slider_thumb_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_media"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_voice_call">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/isMedia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        android:id="@+id/media_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:materialIcon="music_circle" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/media"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        app:thumbRadius="@dimen/slider_thumb_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/alarm_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_media">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/isAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        android:id="@+id/alarm_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:materialIcon="bell_ring" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/alarm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        app:thumbRadius="@dimen/slider_thumb_size" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -7,10 +7,6 @@ import com.tnj.if_else.utils.interfaces.State;
 public class NoState implements State {
 
     private String noStateString = "No State";
-    @Override
-    public Boolean isSuccessful() {
-        return false;
-    }
 
     @Override
     public String getMessage(Context context) {

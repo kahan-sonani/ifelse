@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <activity
-
+            android:screenOrientation="portrait"
             android:theme="@style/SplashPreview"
             android:name=".activities_and_fragments.activities.UserAuthentication"
             android:label="@string/app_name"

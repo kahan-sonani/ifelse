@@ -15,6 +15,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingBottom="@dimen/dp12"
             android:id="@+id/email_fragment_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
-                android:paddingBottom="@dimen/dp16"
+                android:paddingBottom="@dimen/dp10"
                 android:id="@+id/login_options_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,16 +101,18 @@
             </LinearLayout>
 
             <TextView
+                android:background="@drawable/card_background"
+                android:padding="@dimen/dp10"
                 android:paddingBottom="@dimen/dp10"
                 app:layout_constraintTop_toBottomOf="@id/login_options_layout"
                 android:layout_marginEnd="40dp"
                 android:layout_marginStart="40dp"
                 android:drawableStart="@drawable/ic_info_problem"
-                android:drawablePadding="5dp"
+                android:drawablePadding="@dimen/dp10"
                 setErrorText="@{model.validationError}"
                 android:fontFamily="@font/roboto_mono"
                 android:textColor="@android:color/holo_red_dark"
-                android:drawableTint="@android:color/holo_red_dark"
+                app:drawableTint="@android:color/holo_red_dark"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

@@ -34,6 +34,11 @@
     <string name="service_process_id">com.tnj.if_else.services</string>
 
     <!-- Error strings -->
+    <string name="error_workflow_collection_empty">No Workflow defined!, Try using built-In workflows.</string>
+    <string name="error_workflow_delete">Workflow(s) deletion failed!</string>
+    <string name="error_workflow_get">Workflow fetch failed!</string>
+    <string name="error_workflow_update">Workflow update of [ %1s ] failed!</string>
+    <string name="error_workflow_create">Workflow creation failed!</string>
     <string name="error_email_format_invalid">The email address is badly formatted.</string>
     <string name="error_field_required">Required!</string>
     <string name="error_password_wrong">Incorrect Password</string>
@@ -42,8 +47,13 @@
 
     <!-- Success Strings -->
     <string name="success_validation"/>
+    <string name="success_workflow_collection_not_empty">Workflow directory is not empty!</string>
+    <string name="success_workflow_deletion">Workflow(s) deleted successfully!</string>
+    <string name="success_workflow_field_update">[ %1s ] of workflow updated successfully!</string>
+    <string name="success_workflow_create">[ %1s ] Workflow created!</string>
+    <string name="success_workflow_get">Workflow fetched successfully!</string>
     <string name="success_new_email">%1s is not registered for any IFELSE account.</string>
-    <string name="success_existing_email">%1s email address is already registered for another IFELSE account.</string>
+    <string name="success_existing_email">%1s is already registered for another IFELSE account.</string>
     <string name="success_existing_email_google">%1s email address is already registered for another IFELSE account using Google credentials.</string>
     <string name="success_login">Sign in to IFELSE account success with %1s.</string>
     <string name="success_create_account">IFELSE account created successfully using %1s.</string>

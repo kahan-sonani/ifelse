@@ -26,8 +26,6 @@ import com.tnj.if_else.viewModels.TryBuiltInFragmentViewModel;
  */
 public class TryBuiltInFragment extends Fragment {
 
-    TryBuiltInFragmentViewModel model;
-    private FragmentTryBuiltInBinding controls;
     private BIAdapter adapter;
 
     public TryBuiltInFragment() {
@@ -38,8 +36,10 @@ public class TryBuiltInFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = new ViewModelProvider(this).get(TryBuiltInFragmentViewModel.class);
-        adapter = new BIAdapter(model,BIWorkflowProviders.getInstance().getAllWorkflow());
+
+        adapter = new BIAdapter(this,new ViewModelProvider(this).get(TryBuiltInFragmentViewModel.class)
+                ,BIWorkflowProviders.getInstance().getAllWorkflow());
+
         adapter.setListener(proxy -> NavHostFragment.findNavController(TryBuiltInFragment.this)
                 .navigate(TryBuiltInFragmentDirections.actionTryBuiltInFragmentToProfilerSettingsActivity()));
     }
@@ -48,16 +48,10 @@ public class TryBuiltInFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        controls = DataBindingUtil.inflate(inflater, R.layout.fragment_try_built_in, container, false);
+        FragmentTryBuiltInBinding controls = DataBindingUtil.inflate(inflater, R.layout.fragment_try_built_in, container, false);
         ((GridLayoutManager) controls.tryBuiltInWorkflows.getLayoutManager()).setSpanCount(
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1);
         controls.tryBuiltInWorkflows.setAdapter(adapter);
         return controls.getRoot();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        adapter = null;
     }
 }

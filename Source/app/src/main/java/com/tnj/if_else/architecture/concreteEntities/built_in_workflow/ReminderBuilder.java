@@ -6,8 +6,9 @@ import com.tnj.if_else.architecture.baseLevelEntities.Trigger;
 import com.tnj.if_else.architecture.concreteEntities.actionClasses.SendNotificationAction;
 import com.tnj.if_else.architecture.concreteEntities.triggerClasses.CalendarEventTrigger;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflowDetailsProxy;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 import com.tnj.if_else.utils.interfaces.BuiltInWorkflowBuilder;
-import com.tnj.if_else.utils.lookup.ColorUtility;
+
 
 
 public class ReminderBuilder implements BuiltInWorkflowBuilder {

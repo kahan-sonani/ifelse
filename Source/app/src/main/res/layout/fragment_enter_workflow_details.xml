@@ -2,12 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="model"
-            type="com.tnj.if_else.viewModels.CookWorkflowModel" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -36,7 +30,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
-                        android:text="@{model.workflow.details.name}"
                         android:imeOptions="actionNext"
                         android:inputType="textShortMessage"
                         android:maxLength="50" />
@@ -55,7 +48,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Description (optional)"
-                        android:text="@{model.workflow.details.description}"
                         android:imeOptions="actionNext"
                         android:maxLines="10"
                         android:minLines="2" />
@@ -68,10 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layout_description"
                     android:layout_marginTop="10dp"
-                    endIconDrawable="@{model.workflow.details.Color.color}"
                     app:endIconDrawable="@drawable/color_drawable"
-                    app:endIconMode="custom"
-                    app:endIconTint="@color/colorGray">
+                    app:endIconMode="custom">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/choose_color"
@@ -79,12 +69,37 @@
                         android:layout_height="match_parent"
                         style="@style/viewClickStyle"
                         android:hint="Choose color"
-                        android:text="@{model.workflow.details.Color.name}"
                         android:inputType="none"
                         android:textColor="@color/colorBlack" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RadioGroup
+                    android:id="@+id/workflow_status_check"
+                    android:layout_below="@id/color_layout"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RadioButton
+                        android:fontFamily="@font/roboto_mono"
+                        android:padding="5dp"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_marginEnd="@dimen/dp20"
+                        android:text="ENABLE"
+                        android:id="@+id/choice_workflow_status_running"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:checked="true"
+                        android:padding="5dp"
+                        android:fontFamily="@font/roboto_mono"
+                        android:layout_marginEnd="@dimen/dp20"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:text="DISABLE"
+                        android:id="@+id/choice_workflow_status_disabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
             </RelativeLayout>
         </ScrollView>
 

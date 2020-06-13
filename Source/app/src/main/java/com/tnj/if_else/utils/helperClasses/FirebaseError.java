@@ -5,35 +5,29 @@ import android.content.Context;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.tnj.if_else.utils.interfaces.ErrorResponse;
 
-public class FirebaseAuthError {
+public class FirebaseError {
 
-    public enum Error{
+    public enum Error {
 
-        INTERNET_CONNECTION_ERROR(51);
+        UNKNOWN_ERROR(-1),
+        ERROR_EMAIL_ALREADY_IN_USE(54),
+        ERROR_WRONG_PASSWORD(51),
+        ERROR_INVALID_EMAIL(53),
+        INTERNET_CONNECTION_ERROR(52);
 
         private int errorCode;
 
         Error(int errorCode){
             this.errorCode = errorCode;
         }
-
-        public int getErrorCode() {
-            return errorCode;
-        }
     }
+
     public static ErrorResponse fromException(Exception exception) {
-        int errorCode = exception instanceof FirebaseAuthException ?
-                Integer.parseInt(((FirebaseAuthException) exception).getErrorCode()) : -1;
 
         return new ErrorResponse() {
             @Override
             public int getErrorCode() {
-                return errorCode;
-            }
-
-            @Override
-            public Boolean isSuccessful() {
-                return false;
+                return getError(exception).errorCode;
             }
 
             @Override
@@ -46,5 +40,14 @@ public class FirebaseAuthError {
                 return exception.getMessage();
             }
         };
+    }
+    private static Error getError(Exception exception){
+        if(exception instanceof FirebaseAuthException){
+            try{
+                return Error.valueOf(((FirebaseAuthException) exception).getErrorCode());
+            }catch (IllegalArgumentException e){
+                return Error.UNKNOWN_ERROR;
+            }
+        } return Error.UNKNOWN_ERROR;
     }
 }

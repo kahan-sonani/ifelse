@@ -2,9 +2,7 @@
 <layout>
 
     <data>
-        <variable
-            name="context"
-            type="android.content.Context" />
+        <import type="android.view.View"/>
         <variable
             name="model"
             type="com.tnj.if_else.viewModels.SignUpFragmentViewModel" />
@@ -23,7 +21,7 @@
             tools:context=".userAuthentication.signUpFragment.SignUpFragment">
 
             <include
-                android:visibility="gone"
+                android:visibility="@{model.loading ? View.VISIBLE : View.GONE}"
                 android:id="@+id/progress_bar_layout"
                 layout="@layout/progress_bar" />
 
@@ -53,7 +51,6 @@
                     android:id="@+id/email_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    app:error="@{model.emailError.getMessage(context)}"
                     android:layout_height="wrap_content"
                     app:endIconMode="clear_text">
 
@@ -73,7 +70,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/email_layout"
-                    app:error="@{model.passwordError.getMessage(context)}"
                     android:layout_marginTop="20dp"
                     app:endIconMode="password_toggle">
 
@@ -95,7 +91,6 @@
                     android:layout_below="@id/pass_layout"
                     android:layout_marginTop="20dp"
                     android:hint="Confirm password"
-                    app:error="@{model.confirmError.getMessage(context)}"
                     app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -108,14 +103,33 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/textinput_error"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/card_background"
+                android:padding="@dimen/dp10"
+                app:layout_constraintTop_toBottomOf="@id/layout_sign_up"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="40dp"
+                android:drawableStart="@drawable/ic_info_problem"
+                android:drawablePadding="@dimen/dp10"
+                setErrorText="@{model.errorResponseEvent}"
+                android:fontFamily="@font/roboto_mono"
+                android:textColor="@android:color/holo_red_dark"
+                app:drawableTint="@android:color/holo_red_dark"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sign_up_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
+                android:enabled="@{!model.loading}"
                 android:text="SIGN UP"
                 app:layout_constraintEnd_toEndOf="@id/layout_sign_up"
-                app:layout_constraintTop_toBottomOf="@id/layout_sign_up" />
+                app:layout_constraintTop_toBottomOf="@id/textinput_error" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

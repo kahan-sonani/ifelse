@@ -1,12 +1,18 @@
 package com.tnj.if_else.firebaseRepository;
 
-import android.util.Log;
+import androidx.lifecycle.LiveData;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Source;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
-import com.tnj.if_else.utils.firebase.CustomWorkflowParser;
-import com.tnj.if_else.utils.interfaces.ResultSet;
+import com.tnj.if_else.utils.enums.WorkflowErrorCodes;
+import com.tnj.if_else.utils.enums.WorkflowSuccessCodes;
+import com.tnj.if_else.utils.helperClasses.CustomWorkflowParser;
+import com.tnj.if_else.utils.helperClasses.Event;
+import com.tnj.if_else.utils.helperClasses.Response;
+import com.tnj.if_else.utils.helperClasses.WorkflowResponseError;
+import com.tnj.if_else.utils.helperClasses.WorkflowResponseSuccess;
+import com.tnj.if_else.utils.interfaces.State;
 
 public class FirebaseCustomWorkflowOperations extends FirebaseWorkflowOperations {
 
@@ -15,37 +21,33 @@ public class FirebaseCustomWorkflowOperations extends FirebaseWorkflowOperations
         collectionReference = FirebasePathProvider.custom();
     }
 
-    public void createWorkflow(CustomWorkflow workflow) {
+    public LiveData<Response<? extends State>> createWorkflow(CustomWorkflow workflow) {
+
+        Event<Response<? extends State>> responseEvent = new Event<>();
 
         DocumentReference reference = collectionReference.document();
         workflow.setId(reference.getId());
         collectionReference.document(reference.getId())
                 .set(workflow)
-                .addOnSuccessListener(aVoid -> Log.i("ifelse", "new workflow added!"))
-                .addOnFailureListener(e -> Log.i("ifelse", "Error: -> " + e.getMessage()));
+                .addOnSuccessListener(aVoid -> responseEvent.setValue(new WorkflowResponseSuccess<>(WorkflowSuccessCodes.WORKFLOW_CREATE_SUCCESS).finished(true)))
+                .addOnFailureListener(e -> responseEvent.setValue(new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_CREATE_ERROR).finished(true)));
+        return responseEvent;
     }
 
-    public void getWorkflow(Source source, String id, ResultSet<CustomWorkflow> result) {
+    public LiveData<Response<?>> getWorkflow(Source source, String id) {
+        return getWorkflowPrivate(source , id);
+    }
+    public LiveData<Response<?>> getWorkflow(String id) {
+        return getWorkflowPrivate(Source.SERVER , id);
+    }
 
+    private LiveData<Response<?>> getWorkflowPrivate(Source source , String id){
+        Event<Response<?>> responseEvent = new Event<>();
         collectionReference
                 .document(id)
                 .get(source)
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists() && result != null)
-                        result.onResult(CustomWorkflowParser.parseSnapshot(documentSnapshot));
-                })
-                .addOnFailureListener(Throwable::printStackTrace);
-
-    }
-    public void getWorkflow(String id, ResultSet<CustomWorkflow> result) {
-
-        collectionReference
-                .document(id).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists() && result != null)
-                        result.onResult(CustomWorkflowParser.parseSnapshot(documentSnapshot));
-                })
-                .addOnFailureListener(Throwable::printStackTrace);
-
+                .addOnSuccessListener(documentSnapshot -> responseEvent.setValue(new WorkflowResponseSuccess<>(CustomWorkflowParser.parseSnapshot(documentSnapshot)).finished(true)))
+                .addOnFailureListener(aVoid -> responseEvent.setValue(new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_GET_ERROR).finished(true)));
+        return responseEvent;
     }
 }

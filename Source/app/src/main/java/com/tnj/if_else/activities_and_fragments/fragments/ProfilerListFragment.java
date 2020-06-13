@@ -11,11 +11,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.tnj.if_else.R;
 import com.tnj.if_else.activities_and_fragments.activities.ProfilerSettingsActivity;
 import com.tnj.if_else.adapters.ProfilerAdapter;
+import com.tnj.if_else.architecture.concreteEntities.built_in_workflow.ProfilerBuilder;
 import com.tnj.if_else.databinding.FragmentProfilerListBinding;
+import com.tnj.if_else.firebaseRepository.FirebaseRepository;
+import com.tnj.if_else.utils.helperClasses.BuiltInWorkflowParser;
 import com.tnj.if_else.viewModels.ProfilerModel;
 
 /**
@@ -44,7 +48,7 @@ public class ProfilerListFragment extends Fragment implements ProfilerSettingsAc
                              Bundle savedInstanceState) {
 
         controls = DataBindingUtil.inflate(inflater, R.layout.fragment_profiler_list, container, false);
-        /*registration = BuiltInWorkflowConfigurationRepository.getInstance().getBuiltInWorkflowQuery(ProfilerBuilder.ID)
+        registration = FirebaseRepository.getInstance().builtIn().getBuiltInWorkflowQuery(ProfilerBuilder.ID)
                 .addSnapshotListener((queryDocumentSnapshots, e) -> {
                     if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
                         DocumentSnapshot snapshot = queryDocumentSnapshots.getDocuments().get(0);
@@ -60,7 +64,7 @@ public class ProfilerListFragment extends Fragment implements ProfilerSettingsAc
                         }
                         adapter.setProfiler(BuiltInWorkflowParser.parseSnapshot(snapshot));
                     }
-                });*/
+                });
 
         return controls.getRoot();
     }

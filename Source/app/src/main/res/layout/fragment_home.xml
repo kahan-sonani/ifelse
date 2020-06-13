@@ -34,5 +34,8 @@
             app:icon="@drawable/ic_cook_workflow"
             app:layout_anchor="@id/workflow_list"
             app:layout_anchorGravity="bottom|end" />
+
+        <include android:id="@+id/helper_dialog"
+            layout="@layout/helper_info_layout"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

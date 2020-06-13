@@ -5,7 +5,7 @@ import android.content.Context;
 import com.tnj.if_else.R;
 import com.tnj.if_else.utils.interfaces.SuccessState;
 
-public enum SuccessResponse implements SuccessState {
+public enum AuthSuccessResponse implements SuccessState {
 
     NEW_EMAIL(R.string.success_new_email),
     EXISTING_EMAIL(R.string.success_existing_email),
@@ -18,7 +18,7 @@ public enum SuccessResponse implements SuccessState {
     private int successCode;
     private int messageId;
 
-    SuccessResponse(int messageId){
+    AuthSuccessResponse(int messageId){
         this.successCode = ordinal();
         this.messageId = messageId;
     }
@@ -26,11 +26,6 @@ public enum SuccessResponse implements SuccessState {
     @Override
     public int getSuccessCode() {
         return successCode;
-    }
-
-    @Override
-    public Boolean isSuccessful() {
-        return true;
     }
 
     @Override

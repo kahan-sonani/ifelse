@@ -2,7 +2,7 @@ package com.tnj.if_else.architecture.baseLevelEntities;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.tnj.if_else.utils.helperClasses.Color;
-import com.tnj.if_else.utils.lookup.ColorUtility;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 
 @IgnoreExtraProperties
 public abstract class WorkflowDetailsProxy {

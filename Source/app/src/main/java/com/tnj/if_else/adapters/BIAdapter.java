@@ -7,9 +7,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tnj.if_else.R;
@@ -17,6 +19,9 @@ import com.tnj.if_else.architecture.baseLevelEntities.Action;
 import com.tnj.if_else.architecture.baseLevelEntities.Trigger;
 import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflowDetailsProxy;
+import com.tnj.if_else.firebaseRepository.schema.WorkflowSchema;
+import com.tnj.if_else.utils.enums.WorkflowErrorCodes;
+import com.tnj.if_else.utils.enums.WorkflowSuccessCodes;
 import com.tnj.if_else.viewModels.TryBuiltInFragmentViewModel;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
@@ -26,13 +31,15 @@ import java.util.ArrayList;
 
 public class BIAdapter extends RecyclerView.Adapter<BIAdapter.BIHolder>  {
 
+    private LifecycleOwner owner;
     private ArrayList<BuiltInWorkflowDetailsProxy> list;
     private OnBuiltInWorkflowDetailsProxyClick listener;
     private TryBuiltInFragmentViewModel model;
 
-    public BIAdapter(TryBuiltInFragmentViewModel model, ArrayList<BuiltInWorkflowDetailsProxy> list) {
+    public BIAdapter(LifecycleOwner lifeCycleOwner, TryBuiltInFragmentViewModel model, ArrayList<BuiltInWorkflowDetailsProxy> list) {
         this.list = list;
         this.model = model;
+        owner = lifeCycleOwner;
     }
 
     @NonNull
@@ -66,11 +73,11 @@ public class BIAdapter extends RecyclerView.Adapter<BIAdapter.BIHolder>  {
         holder.biActionText.setText(action.getActionDetails().name);
         holder.biTriggerText.setText(trigger.getTriggerDetails().name);
         holder.biCriteriaText.setText("None");
-        holder.startLoadingUI();
-        model.getStatusForWorkflow(position, list.get(position).getId(),
-                result -> {
-                    holder.endLoadingUI();
-                    holder.biStatusEnable.setChecked(result);
+        holder.loading(true);
+        model.getStatusForWorkflow(position, list.get(position).getId())
+                .observe(owner, s -> {
+                    holder.loading(false);
+                    if(s != null) holder.biStatusEnable.setChecked(Workflow.State.ACTIVATED.equals(s));
                 });
     }
 
@@ -110,22 +117,25 @@ public class BIAdapter extends RecyclerView.Adapter<BIAdapter.BIHolder>  {
             listenForChange();
         }
 
-        public void startLoadingUI() {
-            progressForStatus.setVisibility(View.VISIBLE);
-            biStatusEnable.setEnabled(false);
-        }
-
-        public void endLoadingUI() {
-            progressForStatus.setVisibility(View.GONE);
-            biStatusEnable.setEnabled(true);
+        public void loading(boolean loadOrNot) {
+            progressForStatus.setVisibility(loadOrNot ? View.VISIBLE : View.GONE);
+            biStatusEnable.setEnabled(!loadOrNot);
         }
 
         void listenForChange(){
             biStatusEnable.setOnCheckedChangeListener((compoundButton, b) -> {
-                startLoadingUI();
+                loading(true);
                 String newState = b ? Workflow.State.ACTIVATED : Workflow.State.DEACTIVATED;
-                model.updateStatusForWorkflow(getAbsoluteAdapterPosition(), list.get(getAbsoluteAdapterPosition()).getId(),
-                        result -> endLoadingUI(),newState);
+                model.updateStatusForWorkflow(list.get(getAbsoluteAdapterPosition()).getId() , newState)
+                        .observe(owner, state -> {
+                            loading(false);
+                            if(state instanceof WorkflowErrorCodes)
+                                Toast.makeText(biStatusEnable.getContext(), state.getMessage(biStatusEnable.getContext(),
+                                        WorkflowSchema.STATE), Toast.LENGTH_SHORT).show();
+                            else if(state == WorkflowSuccessCodes.WORKFLOW_UPDATE_SUCCESS)
+                                Toast.makeText(biStatusEnable.getContext(), state.getMessage(biStatusEnable.getContext()
+                                        ,WorkflowSchema.STATE), Toast.LENGTH_SHORT).show();
+                        });
             });
         }
     }

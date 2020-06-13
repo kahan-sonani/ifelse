@@ -15,14 +15,13 @@ import com.tnj.if_else.R;
 import com.tnj.if_else.databinding.ActivityEditWorkflowBinding;
 import com.tnj.if_else.firebaseRepository.schema.FirebaseConfig;
 import com.tnj.if_else.utils.UI.UICompatibility;
-import com.tnj.if_else.utils.lookup.ColorUtility;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 
 import java.util.Objects;
 
 public class EditWorkflowActivity extends AppCompatActivity {
 
     Bundle options;
-    ActivityEditWorkflowBinding controls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class EditWorkflowActivity extends AppCompatActivity {
 
         options = getIntent().getExtras();
         setTheme(ColorUtility.getTheme(Objects.requireNonNull(options.getString(IntentExtras.COLOR_NAME))));
-        controls = DataBindingUtil.setContentView(this, R.layout.activity_edit_workflow);
+        ActivityEditWorkflowBinding controls = DataBindingUtil.setContentView(this, R.layout.activity_edit_workflow);
         NavController controller = Navigation.findNavController(this, R.id.edit_host);
         NavGraph graph = controller.getGraph();
         if (options.getInt(IntentExtras.CATEGORY) == FirebaseConfig.CATEGORY.BUILT_IN.ordinal())

@@ -31,7 +31,6 @@ import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflow;
 import com.tnj.if_else.architecture.secondLevelEntities.CustomWorkflow;
 import com.tnj.if_else.databinding.FragmentHomeBinding;
-import com.tnj.if_else.databinding.HelperInfoLayoutBinding;
 import com.tnj.if_else.firebaseRepository.schema.FirebaseConfig;
 import com.tnj.if_else.utils.interfaces.OnWorkflowTouchListener;
 import com.tnj.if_else.viewModels.HomeFragmentViewModel;
@@ -48,7 +47,6 @@ public class HomeFragment extends Fragment {
     private BIHomeAdapter adapterBuiltIn;
     private CSHomeAdapter adapterCustom;
     private ActionMode actionMode;
-    private HelperInfoLayoutBinding binding = null;
     private ActionMode.Callback actionModeCallback;
 
     public HomeFragment() {
@@ -74,20 +72,10 @@ public class HomeFragment extends Fragment {
         listenForScrollChange();
         controls.cookWorkflowFAB.setOnClickListener(view -> NavHostFragment.findNavController(HomeFragment.this)
                 .navigate(HomeFragmentDirections.actionHomeFragmentToSingleWorkflowManagerActivity()));
+        initializeDialog();
         controls.setLifecycleOwner(this);
-        return controls.getRoot();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         showHelperDialog();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        model.isDialogShown = false;
+        return controls.getRoot();
     }
 
     @Override
@@ -97,7 +85,6 @@ public class HomeFragment extends Fragment {
         actionMode = null;
         adapterBuiltIn = null;
         adapterCustom = null;
-        binding = null;
         controls = null;
     }
 
@@ -109,8 +96,8 @@ public class HomeFragment extends Fragment {
         adapterBuiltIn = new BIHomeAdapter(model.getBuiltInWorkflowAdapterConfig().getFireStoreRecyclerOptions());
         adapterCustom = new CSHomeAdapter(model.getCustomWorkflowAdapterConfig().getFireStoreRecyclerOptions());
 
-        adapterCustom.setSelectedWorkflows(model.getCustomWorkflowAdapterConfig().getSelectedWorkflows());
-        adapterBuiltIn.setSelectedWorkflows(model.getBuiltInWorkflowAdapterConfig().getSelectedWorkflows());
+        adapterBuiltIn.setModel(model);
+        adapterCustom.setModel(model);
 
         adapterBuiltIn.setActionListener(new OnWorkflowTouchListener<BuiltInWorkflow>() {
             @Override
@@ -167,6 +154,7 @@ public class HomeFragment extends Fragment {
         AdapterConfig<BuiltInWorkflow> builtInWorkflowAdapterConfig = model.getBuiltInWorkflowAdapterConfig();
         AdapterConfig<CustomWorkflow> customWorkflowAdapterConfig = model.getCustomWorkflowAdapterConfig();
 
+
         actionModeCallback = new ActionMode.Callback() {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -212,17 +200,17 @@ public class HomeFragment extends Fragment {
                         return true;
                     case R.id.workflow_status_active:
                         if (model.getCurrentSelectedWorkflow() instanceof BuiltInWorkflow)
-                            model.updateStateForBuiltInWorkflow(null,Workflow.State.ACTIVATED);
+                            model.updateStateForBuiltInWorkflow(Workflow.State.ACTIVATED);
                         else
-                            model.updateStateForCustomWorkflow(null,Workflow.State.ACTIVATED);
+                            model.updateStateForCustomWorkflow(Workflow.State.ACTIVATED);
                         finishActionMode();
                         return true;
 
                     case R.id.workflow_status_inactive:
                         if (model.getCurrentSelectedWorkflow() instanceof BuiltInWorkflow)
-                            model.updateStateForBuiltInWorkflow(null,Workflow.State.DEACTIVATED);
+                            model.updateStateForBuiltInWorkflow(Workflow.State.DEACTIVATED);
                         else
-                            model.updateStateForCustomWorkflow(null,Workflow.State.DEACTIVATED);
+                            model.updateStateForCustomWorkflow(Workflow.State.DEACTIVATED);
                         finishActionMode();
                         return true;
                     default:
@@ -277,10 +265,10 @@ public class HomeFragment extends Fragment {
                 controller.navigate(HomeFragmentDirections.actionHomeFragmentToTryBuiltInFragment());
                 break;
             case R.id.disable_all_workflow:
-                model.disableEnableAllWorkflow(FirebaseConfig.UPDATE.DISABLE,null);
+                model.disableEnableAllWorkflow(FirebaseConfig.UPDATE.DISABLE);
                 break;
             case R.id.enable_all_workflow:
-                model.disableEnableAllWorkflow(FirebaseConfig.UPDATE.ENABLE,null);
+                model.disableEnableAllWorkflow(FirebaseConfig.UPDATE.ENABLE);
                 break;
         }
         return true;
@@ -292,27 +280,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void showHelperDialog() {
-        model.isListEmpty(result -> {
-            if (result) {
-                if (!model.isDialogShown && !model.didUserCloseDialog) {
-                    binding = HelperInfoLayoutBinding
-                            .inflate(LayoutInflater.from(getContext()), controls.homeMain, false);
-                    controls.homeMain.addView(binding.getRoot());
-                    model.isDialogShown = true;
-                    binding.noteTryIt.setOnClickListener(view -> {
-                        NavHostFragment.findNavController(HomeFragment.this)
-                                .navigate(HomeFragmentDirections.actionHomeFragmentToTryBuiltInFragment());
-                        model.isDialogShown = false;
-                    });
-                    binding.noteClose.setOnClickListener(view -> {
-                        controls.homeMain.removeView(binding.getRoot());
-                        model.didUserCloseDialog = true;
-                        model.isDialogShown = false;
-                    });
-                }
-            } else if (binding != null)
-                controls.homeMain.removeView(binding.getRoot());
-        });
+        model.isListEmpty().observe(getViewLifecycleOwner(), aBoolean ->
+                controls.helperDialog.getRoot().setVisibility(aBoolean && !model.didUserCloseDialog ? View.VISIBLE : View.GONE));
     }
 
     private void listenForScrollChange() {
@@ -335,14 +304,26 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void dataSetChange(){
+    private void dataSetChange() {
         adapterBuiltIn.notifyDataSetChanged();
         adapterCustom.notifyDataSetChanged();
     }
-    private void joinAdapters(){
-        MergeAdapter joiner = new MergeAdapter(adapterBuiltIn,adapterCustom);
+
+    private void joinAdapters() {
+        MergeAdapter joiner = new MergeAdapter(adapterBuiltIn, adapterCustom);
         adapterCustom.setJoiner(joiner);
         adapterBuiltIn.setJoiner(joiner);
         controls.workflowList.setAdapter(joiner);
+    }
+
+    private void initializeDialog(){
+        controls.helperDialog.noteTryIt.setOnClickListener(view -> {
+            NavHostFragment.findNavController(HomeFragment.this)
+                    .navigate(HomeFragmentDirections.actionHomeFragmentToTryBuiltInFragment());
+        });
+        controls.helperDialog.noteClose.setOnClickListener(view -> {
+            controls.helperDialog.getRoot().setVisibility(View.GONE);
+            model.didUserCloseDialog = true;
+        });
     }
 }

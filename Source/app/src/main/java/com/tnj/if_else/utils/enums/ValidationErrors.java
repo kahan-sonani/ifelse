@@ -25,11 +25,6 @@ public enum ValidationErrors implements ErrorResponse {
     }
 
     @Override
-    public Boolean isSuccessful() {
-        return false;
-    }
-
-    @Override
     public String getMessage(Context context) {
         return toString().equals(NO_ERROR) ? null : context.getString(messageId);
     }

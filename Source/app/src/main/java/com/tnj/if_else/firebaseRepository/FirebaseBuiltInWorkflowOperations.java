@@ -1,13 +1,22 @@
 package com.tnj.if_else.firebaseRepository;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.Source;
 import com.tnj.if_else.architecture.secondLevelEntities.BuiltInWorkflow;
 import com.tnj.if_else.firebaseRepository.schema.WorkflowSchema;
-import com.tnj.if_else.utils.firebase.BuiltInWorkflowParser;
-import com.tnj.if_else.utils.helperClasses.Inlines;
-import com.tnj.if_else.utils.interfaces.ResultSet;
+import com.tnj.if_else.utils.enums.WorkflowErrorCodes;
+import com.tnj.if_else.utils.enums.WorkflowSuccessCodes;
+import com.tnj.if_else.utils.helperClasses.BuiltInWorkflowParser;
+import com.tnj.if_else.utils.helperClasses.Event;
+import com.tnj.if_else.utils.helperClasses.FirebaseError;
+import com.tnj.if_else.utils.helperClasses.Response;
+import com.tnj.if_else.utils.helperClasses.WorkflowResponseError;
+import com.tnj.if_else.utils.helperClasses.WorkflowResponseSuccess;
+import com.tnj.if_else.utils.interfaces.State;
 
 public class FirebaseBuiltInWorkflowOperations extends FirebaseWorkflowOperations {
 
@@ -20,75 +29,66 @@ public class FirebaseBuiltInWorkflowOperations extends FirebaseWorkflowOperation
         return collectionReference.whereEqualTo(WorkflowSchema.ID, id);
     }
 
-    public void createWorkflow(String id, ResultSet<Boolean> listener) {
+    public LiveData<Response<? extends State>> createWorkflow(String id) {
+
+        Event<Response<? extends State>> responseMutableLiveData = new Event<>();
         collectionReference.document(id)
                 .set(new BuiltInWorkflow(id))
-                .addOnSuccessListener(aVoid -> Inlines.nonNull(listener, true))
-                .addOnFailureListener(e -> {
-                    Inlines.nonNull(listener, false);
-                    e.printStackTrace();
-                });
+                .addOnSuccessListener(aVoid -> responseMutableLiveData.setValue(
+                        new WorkflowResponseSuccess<>(WorkflowSuccessCodes.WORKFLOW_CREATE_SUCCESS).finished(true)))
+                .addOnFailureListener(e -> responseMutableLiveData.setValue(new WorkflowResponseError<>(FirebaseError.fromException(e))));
+        return responseMutableLiveData;
     }
 
-    public <T> void updateOrCreateWorkflow(String id, ResultSet<Boolean> listener, String key, T object, Object... FieldsAndObjects) {
+    public <T> LiveData<Response<? extends State>> updateOrCreateWorkflow(String id, String key, T object, Object... FieldsAndObjects) {
+
+        MutableLiveData<Response<? extends State>> responseMutableLiveData = new MutableLiveData<>();
+
         DocumentReference reference = collectionReference.document(id);
         reference.get().addOnSuccessListener(snapshot -> {
             if(snapshot.exists()) {
                 reference.update(key,object,FieldsAndObjects)
-                        .addOnSuccessListener(aVoid -> Inlines.nonNull(listener,true))
-                        .addOnFailureListener(e -> {
-                            Inlines.nonNull(listener,false);
-                            e.printStackTrace();
-                        });
+                        .addOnSuccessListener(aVoid -> responseMutableLiveData.setValue(new WorkflowResponseSuccess<>(WorkflowSuccessCodes.WORKFLOW_UPDATE_SUCCESS)
+                        .finished(true)))
+                        .addOnFailureListener(e -> responseMutableLiveData.setValue(new WorkflowResponseSuccess<>(WorkflowErrorCodes.WORKFLOW_UPDATE_FAILED)
+                        .finished(true)));
             }else {
-                createWorkflow(id, result -> {
-                    if(result)
-                        reference.update(key,object,FieldsAndObjects)
-                                .addOnSuccessListener(aVoid -> Inlines.nonNull(listener,true))
-                                .addOnFailureListener(e -> Inlines.nonNull(listener,false));
-                });
+                collectionReference.document(id).set(new BuiltInWorkflow(id))
+                        .addOnSuccessListener(aVoid -> {
+                            responseMutableLiveData.setValue(new WorkflowResponseSuccess<>(WorkflowSuccessCodes.WORKFLOW_CREATE_SUCCESS));
+                            reference.update(key,object,FieldsAndObjects)
+                                    .addOnSuccessListener(aVoid1 -> responseMutableLiveData.setValue(
+                                            new WorkflowResponseSuccess<>(WorkflowSuccessCodes.WORKFLOW_UPDATE_SUCCESS).finished(true)))
+                                    .addOnFailureListener(aVoid3 -> responseMutableLiveData.setValue(
+                                            new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_UPDATE_FAILED).finished(true)));
+                        })
+                        .addOnFailureListener(e -> responseMutableLiveData.setValue(new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_CREATE_ERROR).finished(true)));
             }
-        }).addOnFailureListener(e -> {
-            Inlines.nonNull(listener,false);
-            e.printStackTrace();
-        });
+        }).addOnFailureListener(e -> responseMutableLiveData.setValue(new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_GET_ERROR).finished(true)));
+
+        return responseMutableLiveData;
     }
 
-    public void getWorkflow(Source source, String id, ResultSet<BuiltInWorkflow> result) {
+    private LiveData<Response<?>> getWorkflowPrivate(Source source, String id) {
+
+        Event<Response<?>> responseMutableLiveData = new Event<>();
 
         collectionReference
                 .document(id)
                 .get(source)
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (result != null) {
-                        if (documentSnapshot.exists())
-                            try {
-                                result.onResult(BuiltInWorkflowParser.parseSnapshot(documentSnapshot));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        else
-                            result.onResult(null);
-                    }
-                })
-                .addOnFailureListener(Throwable::printStackTrace);
+                .addOnSuccessListener(documentSnapshot -> responseMutableLiveData.setValue(new WorkflowResponseSuccess<>(BuiltInWorkflowParser.parseSnapshot(documentSnapshot))
+                        .setState(WorkflowSuccessCodes.WORKFLOW_GET_SUCCESS).finished(true)))
+                .addOnFailureListener(e ->responseMutableLiveData.setValue(new WorkflowResponseError<>(WorkflowErrorCodes.WORKFLOW_GET_ERROR).finished(true)));
 
+        return responseMutableLiveData;
     }
 
-    public void getWorkflow(String id, ResultSet<BuiltInWorkflow> result) {
+    public LiveData<Response<?>> getWorkflow(String id) {
 
-        collectionReference
-                .document(id)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (result != null) {
-                        if (documentSnapshot.exists())
-                            result.onResult(BuiltInWorkflowParser.parseSnapshot(documentSnapshot));
-                        else
-                            result.onResult(null);
-                    }
-                })
-                .addOnFailureListener(Throwable::printStackTrace);
+        return getWorkflowPrivate(Source.SERVER,id);
+    }
 
+    public LiveData<Response<?>> getWorkflow(Source source, String id) {
+        return getWorkflowPrivate(source, id);
     }
 } 

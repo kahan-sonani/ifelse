@@ -11,51 +11,49 @@
     android:paddingTop="50dp">
 
     <ImageView
-        android:layout_marginStart="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/userPhoto"
         android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_marginStart="@dimen/dp10"
-        app:layout_constraintStart_toEndOf="@id/userPhoto"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/layout_user_photo"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp10"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/userPhoto"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:textSize="@dimen/dp18"
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_mono"
             android:text="@string/app_name"
+            android:textSize="@dimen/dp18"
             android:textStyle="bold" />
 
         <TextView
-            android:text="@string/app_primary_description"
-            android:fontFamily="@font/roboto_mono"
-            android:textSize="@dimen/dp10"
             android:id="@+id/app_description"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_mono"
+            android:text="@string/app_primary_description"
+            android:textSize="@dimen/dp10" />
     </LinearLayout>
 
     <View
-        android:layout_marginTop="@dimen/dp18"
-        app:layout_constraintTop_toBottomOf="@id/user_email"
         android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_marginTop="@dimen/dp18"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/user_email" />
 
     <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        android:textStyle="bold"
         android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +61,8 @@
         android:layout_marginTop="@dimen/dp10"
         android:fontFamily="@font/roboto_mono"
         android:textSize="@dimen/dp12"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userPhoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

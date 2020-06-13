@@ -2,7 +2,6 @@ package com.tnj.if_else.activities_and_fragments.fragments;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,15 @@ import com.tnj.if_else.R;
 import com.tnj.if_else.architecture.baseLevelEntities.Action;
 import com.tnj.if_else.architecture.baseLevelEntities.Criteria;
 import com.tnj.if_else.architecture.baseLevelEntities.Trigger;
+import com.tnj.if_else.architecture.baseLevelEntities.Workflow;
 import com.tnj.if_else.databinding.FragmentEnterWorkflowDetailsBinding;
+import com.tnj.if_else.firebaseRepository.FirebaseRepository;
 import com.tnj.if_else.utils.UI.ColorPickerUtility;
+import com.tnj.if_else.utils.enums.ValidationErrors;
 import com.tnj.if_else.utils.helperClasses.Color;
+import com.tnj.if_else.utils.helperClasses.ColorUtility;
 import com.tnj.if_else.utils.helperClasses.EntitySet;
-import com.tnj.if_else.utils.lookup.ColorUtility;
+import com.tnj.if_else.utils.helperClasses.validator.Validations;
 import com.tnj.if_else.viewModels.CookWorkflowModel;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
@@ -42,19 +45,21 @@ public class EnterWorkflowDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         controls = DataBindingUtil.inflate(inflater, R.layout.fragment_enter_workflow_details, container, false);
         model = new ViewModelProvider(getActivity()).get(CookWorkflowModel.class);
-        controls.setModel(model);
+        controls.colorLayout.getEndIconDrawable().setTint(model.workflow.getDetails().getColor().color);
+        controls.chooseColor.setText(model.workflow.getDetails().getColor().name);
         controls.colorLayout.getEditText().setOnClickListener(v -> showColorPicker());
         controls.saveWorkflow.setOnClickListener(view -> {
-            /*if (model.getTitleValidator().isValid()) {
+            if(Validations.fieldRequired(controls.workflowTitleInput.getText().toString().trim())
+                    == ValidationErrors.NO_ERROR) {
+                controls.layoutTitle.setErrorEnabled(false);
                 try {
                     setWorkflowDetails();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                *//*CustomWorkflowConfigurationRepository.getInstance().createWorkflow(model.workflow);
-                getActivity().finish();*//*
-            } else*/
-                controls.layoutTitle.setError("Required!");
+                getActivity().finish();
+                FirebaseRepository.getInstance().custom().createWorkflow(model.workflow);
+            } else controls.layoutTitle.setError(ValidationErrors.REQUIRED.getMessage(getContext()));
         });
 
         controls.setLifecycleOwner(this);
@@ -69,10 +74,9 @@ public class EnterWorkflowDetailsFragment extends Fragment {
             @Override
             public void setOnFastChooseColorListener(int position, int color) {
                 Color c = ColorUtility.getColorByIndex(position);
-                controls.colorLayout.getEndIconDrawable().setTint(color);
-                controls.chooseColor.setText(c.name);
                 model.workflow.getDetails().setColor(ColorUtility.getColorByIndex(position));
-                Log.i("ifelse",model.workflow.getDetails().getColor().name);
+                controls.chooseColor.setText(c.name);
+                controls.colorLayout.getEndIconDrawable().setTint(c.color);
             }
 
             @Override
@@ -95,13 +99,7 @@ public class EnterWorkflowDetailsFragment extends Fragment {
         for (EntitySet criteriaSet : model.criteria) {
             model.workflow.getSettings().addCriteria((Class<Criteria>) Class.forName(criteriaSet.className));
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        model.workflow.getDetails().setName(controls.workflowDescriptionInput.getText().toString().trim());
-        model.workflow.getDetails().setDescription(controls.workflowDescriptionInput.getText().toString().trim());
-        model = null;
+        model.workflow.getSettings().setState(controls.workflowStatusCheck
+                .getCheckedRadioButtonId() == R.id.choice_workflow_status_running ? Workflow.State.ACTIVATED : Workflow.State.DEACTIVATED);
     }
 }

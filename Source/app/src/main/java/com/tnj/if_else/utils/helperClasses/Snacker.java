@@ -1,4 +1,4 @@
-package com.tnj.if_else.utils.UI;
+package com.tnj.if_else.utils.helperClasses;
 
 import android.view.View;
 import android.widget.TextView;
