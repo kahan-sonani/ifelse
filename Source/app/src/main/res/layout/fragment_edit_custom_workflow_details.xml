@@ -1,118 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="com.tnj.if_else.viewModels.EditCustomWorkflowDetailsViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+
+    <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
-        tools:context=".app.editWorkflowActivity.EditCustomWorkflowDetailsFragment">
+        android:layout_width="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/details_root"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            tools:context=".app.editWorkflowActivity.EditCustomWorkflowDetailsFragment">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_title_layout"
-                style="@style/viewClickStyleNoBorder"
+            <RelativeLayout
+                android:id="@+id/details_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
-                app:errorTextColor="@color/colorWhite"
-                app:errorIconTint="@color/colorWhite"
-                app:boxStrokeErrorColor="@android:color/transparent"
-                android:textColorHint="@color/colorWhite"
-                app:endIconDrawable="@drawable/ic_cook_workflow"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorWhite"
-                app:hintTextColor="@color/colorWhite"
+                android:padding="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:placeholderTextColor="@color/colorWhite">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_title_input"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_title_layout"
+                    style="@style/viewClickStyleNoBorder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:imeOptions="normal"
-                    android:maxLength="50"
-                    android:textAppearance="@style/workflow_title_style"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Name"
+                    android:textColorHint="@color/colorWhite"
+                    app:boxStrokeErrorColor="@android:color/transparent"
+                    app:endIconDrawable="@drawable/ic_cook_workflow"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorWhite"
+                    app:errorIconTint="@color/colorWhite"
+                    app:errorTextColor="@color/colorWhite"
+                    app:hintTextColor="@color/colorWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:placeholderTextColor="@color/colorWhite">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_description_layout"
-                style="@style/viewClickStyleNoBorder"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_title_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:imeOptions="normal"
+                        android:maxLength="50"
+                        android:textAppearance="@style/workflow_title_style"
+                        android:textColor="@color/colorWhite" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_description_layout"
+                    style="@style/viewClickStyleNoBorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_title_layout"
+                    android:hint="Description"
+                    android:textColorHint="@color/colorWhite"
+                    app:endIconDrawable="@drawable/ic_cook_workflow"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorWhite"
+                    app:hintTextColor="@color/colorWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_title_layout"
+                    app:placeholderTextColor="@color/colorWhite">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_description_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:imeOptions="actionDone"
+                        android:textAppearance="@style/workflow_status_style"
+                        android:textColor="@color/colorWhite" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_color_layout"
+                    style="@style/viewClickStyleNoBorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_description_layout"
+                    android:hint="Color"
+                    android:textColorHint="@color/colorWhite"
+                    app:endIconDrawable="@drawable/color_drawable"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorGray"
+                    app:hintTextColor="@color/colorWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_description_layout"
+                    app:placeholderTextColor="@color/colorWhite">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_color_input"
+                        style="@style/viewClickStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:textAppearance="@style/workflow_status_style"
+                        android:textColor="@color/colorWhite" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+            <ProgressBar
+                android:layout_marginTop="50dp"
+                android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_title_layout"
-                android:hint="Description"
-                android:textColorHint="@color/colorWhite"
-                app:endIconDrawable="@drawable/ic_cook_workflow"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorWhite"
-                app:hintTextColor="@color/colorWhite"
+                android:indeterminate="true"
+                android:indeterminateBehavior="cycle"
+                android:visibility="@{model.loading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_title_layout"
-                app:placeholderTextColor="@color/colorWhite">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_description_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"
-                    android:textAppearance="@style/workflow_status_style"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_color_layout"
-                style="@style/viewClickStyleNoBorder"
-                android:layout_width="match_parent"
-                android:hint="Color"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edit_description_layout"
-                android:textColorHint="@color/colorWhite"
-                app:endIconDrawable="@drawable/color_drawable"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorGray"
-                app:hintTextColor="@color/colorWhite"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_description_layout"
-                app:placeholderTextColor="@color/colorWhite">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_color_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/viewClickStyle"
-                    android:imeOptions="actionDone"
-                    android:textAppearance="@style/workflow_status_style"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </RelativeLayout>
-
-        <ProgressBar
-            android:indeterminateBehavior="cycle"
-            android:indeterminate="true"
-            android:id="@+id/progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="@{model.loading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/details_root" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/details_root" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

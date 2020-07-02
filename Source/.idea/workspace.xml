@@ -313,18 +313,18 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592046531766">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592204569917">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592046531766" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592204569917" />
     <state x="597" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1591350821113">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="597" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591350821113" />
-    <state x="719" y="379" width="583" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1591720233727">
+    <state x="719" y="379" width="583" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592063114995">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="719" y="379" width="583" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1591720233727" />
+    <state x="719" y="379" width="583" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1592063114995" />
     <state x="164" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591964813014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -345,22 +345,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="815" y="285" key="AndroidProcessChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591627406142" />
-    <state width="1877" height="239" key="GridCell.Tab.0.bottom" timestamp="1592054668413">
+    <state x="267" y="261" key="FileChooserDialogImpl" timestamp="1592126946227">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
-    <state width="1877" height="239" key="GridCell.Tab.0.center" timestamp="1592054668413">
+    <state x="267" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592126946227" />
+    <state width="1877" height="323" key="GridCell.Tab.0.bottom" timestamp="1592056872469">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="239" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
-    <state width="1877" height="239" key="GridCell.Tab.0.left" timestamp="1592054668412">
+    <state width="1877" height="323" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592056872469" />
+    <state width="1877" height="323" key="GridCell.Tab.0.center" timestamp="1592056872468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="239" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668412" />
-    <state width="1877" height="239" key="GridCell.Tab.0.right" timestamp="1592054668413">
+    <state width="1877" height="323" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592056872468" />
+    <state width="1877" height="323" key="GridCell.Tab.0.left" timestamp="1592056872468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="239" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592054668413" />
+    <state width="1877" height="323" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592056872468" />
+    <state width="1877" height="323" key="GridCell.Tab.0.right" timestamp="1592056872469">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="323" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592056872469" />
     <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1591936934441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -381,17 +385,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="472" y="222" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592055525409" />
-    <state x="626" y="456" key="com.intellij.ide.util.TipDialog" timestamp="1592021354539">
+    <state x="626" y="456" key="com.intellij.ide.util.TipDialog" timestamp="1592204472878">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="626" y="456" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592021354539" />
+    <state x="626" y="456" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592204472878" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1591817471607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591817471607" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592054976415">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592205184717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592054976415" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592205184717" />
   </component>
 </project>

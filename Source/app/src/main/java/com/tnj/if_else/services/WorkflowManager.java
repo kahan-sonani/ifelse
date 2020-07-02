@@ -36,7 +36,6 @@ public class WorkflowManager extends Service {
         TaskStackBuilder builder = TaskStackBuilder.create(this);
         builder.addNextIntentWithParentStack(notificationIntent);
         PendingIntent pendingIntent = builder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
-
         Notification notification = new NotificationCompat.Builder(this, IFELSEApplication.NOTIFICATION_CHANNEL_ID)
                 .setContentTitle("IFELSE service : Running")
                 .setSmallIcon(R.drawable.ic_notification_app_icon)

@@ -26,6 +26,7 @@ public class actions {
 
     public static class categoryNotification {
 
+        public static final String SendSMSAction = "Send SMS";
         public static final java.lang.String SendNotificationAction = "Send Notification";
         public static final java.lang.String SetNotificationClickAction = "Notification click Action";
     }

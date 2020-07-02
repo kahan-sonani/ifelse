@@ -1,12 +1,13 @@
 package com.tnj.if_else.activities_and_fragments.fragments;
 
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.databinding.DataBindingUtil;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -43,9 +44,10 @@ public class EnterWorkflowDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        controls = DataBindingUtil.inflate(inflater, R.layout.fragment_enter_workflow_details, container, false);
+        controls = FragmentEnterWorkflowDetailsBinding.inflate(inflater,container, false);
         model = new ViewModelProvider(getActivity()).get(CookWorkflowModel.class);
-        controls.colorLayout.getEndIconDrawable().setTint(model.workflow.getDetails().getColor().color);
+        controls.colorLayout.getEndIconDrawable()
+                .setColorFilter(ContextCompat.getColor(getActivity(),model.workflow.getDetails().getColor().color), PorterDuff.Mode.SRC);
         controls.chooseColor.setText(model.workflow.getDetails().getColor().name);
         controls.colorLayout.getEditText().setOnClickListener(v -> showColorPicker());
         controls.saveWorkflow.setOnClickListener(view -> {
@@ -76,7 +78,8 @@ public class EnterWorkflowDetailsFragment extends Fragment {
                 Color c = ColorUtility.getColorByIndex(position);
                 model.workflow.getDetails().setColor(ColorUtility.getColorByIndex(position));
                 controls.chooseColor.setText(c.name);
-                controls.colorLayout.getEndIconDrawable().setTint(c.color);
+                controls.colorLayout.getEndIconDrawable()
+                        .setColorFilter(ContextCompat.getColor(getContext(),c.color), PorterDuff.Mode.SRC);
             }
 
             @Override
